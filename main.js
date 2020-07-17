@@ -1,116 +1,116 @@
-// function main() {
-//     let splashScreen;
-//     let gameScreen;
-//     let gameOverScreen;
+function buildPage(html) {
+    let div = document.createElement('div');
 
-//     function createSplashscreen() {
-//         splashScreen = buildDom(`
-//             <main>
-//                 <div class="title">
-//                     <h1>Frogger Lightyear</h1>
-//                     <p>Frogger has been on an amazing space-adventure. Reach the top and help him come home safe!</p>
-//                     <div>
-//                         <h3>Keys</h3>
-//                         <ul>
-//                             <li>Arrow Up = Up</li>
-//                             <li>Arrow Left = Left</li>
-//                             <li>Arrow Right = Right</li>
-//                         </ul>
-//                     </div> 
-//                     <button id="start-btn" class ="button">START</button>
-//                 </div>
-//             </main>`);
+    div.innerHTML = html;
 
-//         document.body.appendChild(splashScreen);
+    return div.children[0];
 
-//         let startButton = splashScreen.querySelector("#start-btn");
+}
 
-//         startButton.addEventListener("click", function() {
-//             startGame();
-//         });
-//     }
-
-//     function removeSplashScreen() {
-//         splashScreen.remove();
-//     }
-
-//     function createGamescreen() {
-//         gameScreen = buildDom(`
-//         <main>
-//             <div class='counter'>
-//                 <span class='score'>Score:</span>
-//                 <span class='score'>Lives:</span>
-//                 <img src="life.png" alt='life' class="lives">
-//                 <img src="life.png" alt='life' class="lives">
-//                 <img src="life.png" alt='life' class="lives">
-//             </div> 
-//             <div>
-//                 <canvas id='gameCanvas' width="450" height="500"></canvas>
-//             </div>
-//         </main>`);
-
-//         document.body.appendChild(gameScreen);
-
-//         return gameScreen;
+function main() {
+    let bodyIndex = document.querySelector('body');
+    let splashScreen;
+    let gameScreen;
+    let gameOverScreen;
     
-//     }
+    function createSplashScreen() {
+        splashScreen = buildPage(`
+            <main>
+                <div class="title">
+                    <h1>Frogger Lightyear</h1>
+                    <p>Frogger has been on an amazing space-adventure. Reach the top and help him come home safe!</p>
+                    <div>
+                        <h3>Keys</h3>
+                        <ul>
+                            <li>Arrow Up = Up</li>
+                            <li>Arrow Left = Left</li>
+                            <li>Arrow Right = Right</li>
+                        </ul>
+                    </div> 
+                    <button id="start-btn" class ="button">START</button>
+                </div>
+            </main>`);
 
-//     function removeGameScreen() {
-//         gameScreen.remove();
-//     }
+        bodyIndex.appendChild(splashScreen);
 
-//     function createGameOverscreen() {
-//         gameOverScreen = buildDom(`
-//         <main>
-//             <div>
-//                 <h3>GAME OVER!</h3>
-//                 <p>Frogger Lightyear floats in space for ever...</p>
-//                 <p>`You scored ${totalScore} points`</p>
-//             </div> 
-//             <div>
-//                 <button id="reset-btn" class ="button">RESTART</button>
-//             </div>
-//             <div>
-//                 <p>In honor of Frogger</p>
-//                 <p>Lanette &copy 2020</p>
-//             </div>
-//         </main>`);
+        let startBtn = splashScreen.querySelector('#start-btn');
 
-//         document.body.appendChild(gameOverScreen);
+        startBtn.addEventListener('click', function() {
+            removeSplashScreen();
+            createGameScreen();
+        });
 
-//         let resetButton = gameOverScreen.querySelector("#reset-btn");
+    };
 
-//         resetButton.addEventListener("click", function() {
-//             startGame();
-//         });
+    function removeSplashScreen() {
+        splashScreen.remove();
+    }
 
-//     }
+    function createGameScreen() {
+        gameScreen = buildPage(`
+        <main>
+            <div class='counter'>
+                <span class='score'>Score:</span>
+                <span class='score'>Lives:</span>
+                <img src="images/life.png" alt='life' class="lives">
+                <img src="images/life.png" alt='life' class="lives">
+                <img src="images/life.png" alt='life' class="lives">
+            </div> 
+            <div>
+                <canvas id='gameCanvas' width="450" height="500"></canvas>
+            </div>
+            <button id="gameover-btn" class ="button">gameover</button>
+        </main>`);
+        
+        bodyIndex.appendChild(gameScreen);
 
-//     function removeGameOverScreen() {
-//         gameOverScreen.remove();
-//     }
+        let gameOverBtn = gameScreen.querySelector('#gameover-btn');
 
-//     function startGame() {
-//         removeSplashScreen();
-//         removeGameOverScreen();
+        gameOverBtn.addEventListener('click', function() {
+            removeGameScreen();
+            createGOScreen();
+        })
 
-//         game.gameScreen = createGameScreen();
+    };
 
-//         game.start();
+    function removeGameScreen() {
+        gameScreen.remove();
+    }
 
-//         game.gameOverCallback(gameOver);
-//     }
+    function createGOScreen() {
+        gameOverScreen = buildPage(`
+        <main>
+            <div>
+                <h3>GAME OVER!</h3>
+                <p>Frogger Lightyear floats in space for ever...</p>
+                
+            </div> 
+            <div>
+                <button id="restart-btn" class ="button">RESTART</button>
+            </div>
+            <div>
+                <p>In honor of Frogger</p>
+                <p>Lanette &copy 2020</p>
+            </div>
+        </main>`);
 
-//     function gameOver() {
-//         removeGameScreen();
-//         createGameOverscreen(this.totalScore);
-//     }
+        bodyIndex.appendChild(gameOverScreen);
 
-//     createSplashscreen();
+        let restartBtn = gameOverScreen.querySelector('#restart-btn');
 
-// }
+        restartBtn.addEventListener('click', function() {
+            removeGOScreen();
+            createSplashScreen();
+        });
 
-// window.addEventListener("load", "main");
+    };
 
+    function removeGOScreen() {
+        gameOverScreen.remove();
+    }
 
+    createSplashScreen();
 
+}
+
+window.addEventListener("load", main)

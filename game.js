@@ -1,3 +1,5 @@
+
+
 // Draw canvas
 let canvas = document.getElementById('gameCanvas');
 canvas.style.border = '5px solid lightblue';
@@ -110,6 +112,7 @@ intervalId = setInterval(() => {
     requestAnimationFrame(draw);
     
 }, 10)
+
 
 
 
