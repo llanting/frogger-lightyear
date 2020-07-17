@@ -15,19 +15,21 @@ function main() {
     
     function createSplashScreen() {
         splashScreen = buildPage(`
-            <main>
-                <div class="title">
-                    <h1>Frogger Lightyear</h1>
-                    <p>Frogger has been on an amazing space-adventure. Reach the top and help him come home safe!</p>
+            <main class="splashScreen">
+                <div class="title jumbotron">
+                    <h1 class="display-4">Frogger Lightyear</h1>
+                    <p class="lead">Frogger has been on an amazing space-adventure. Reach the top and help him come home safe. But watch out for asteroids and a black hole...</p>
                     <div>
-                        <h3>Keys</h3>
-                        <ul>
+                        <h3 class="keyHead">Keys</h3>
+                        <ul class='keys'>
                             <li>Arrow Up = Up</li>
                             <li>Arrow Left = Left</li>
                             <li>Arrow Right = Right</li>
                         </ul>
-                    </div> 
-                    <button id="start-btn" class ="button">START</button>
+                    </div>
+                    <div class="mainSplash">
+                        <button id="start-btn" class ="button btn btn-danger">START</button>
+                        <img class="frogLY" src="images/froggerLY.jpeg" alt='Frogger Lightyear'>
                 </div>
             </main>`);
 

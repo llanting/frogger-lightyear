@@ -3,16 +3,70 @@ body {
   height: 100%;
 }
 
-
 body {
-    background-color: rgb(1, 0, 32); 
-    color: white;
-    margin: 0;
-    padding: 0;
-   
+  background-color: rgb(1, 0, 32); 
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
 }
 
+/* Splash */
+.jumbotron {
+  background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+}
+
+.mainSplash {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.display-4 {
+  font-size: 40px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.keyHead {
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.keys {
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.lead {
+  padding: 20px;
+  font-size: 14px;
+}
+
+#start-btn {
+  margin: 50px;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  font-size: 50px;
+}
+
+.frogLY {
+  width: 20%;
+  height: 20%;
+  border: 5px solid #dc3545;
+  margin: 30px;
+}
+
+/* Game */
 .lives {
-    width: 50px;
-    height: auto;
+  width: 50px;
+  height: auto;
 }
