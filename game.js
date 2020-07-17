@@ -1,7 +1,5 @@
 function start() {
     // Draw canvas
-    console.log(document.querySelector('.canvas-container'))
-
     let canvas = document.querySelector('#game-canvas');
     canvas.style.border = '5px solid lightblue';
 
@@ -11,26 +9,25 @@ function start() {
 
     // Load images
     let bgImg = new Image();
-    bgImg.src = 'images/kai-pilger-Ef6iL87-vOA-unsplash.jpg'
+    bgImg.src = '/images/kai-pilger-Ef6iL87-vOA-unsplash.jpg'
 
     let baseImg = new Image();
-    baseImg.src = 'images/startBase.png';
+    baseImg.src = '/images/startBase.png';
 
     let homeImg = new Image();
-    homeImg.src = 'images/home.png';
+    homeImg.src = '/images/home.png';
 
     let frogger = new Image();
-    frogger.src = 'images/frogger.png'
+    frogger.src = '/images/frogger.png';
 
     let bluePlanet = new Image();
-    bluePlanet.src = 'images/bluePlanet.png'
+    bluePlanet.src = '/images/bluePlanet.png';
 
     let yellowPlanet = new Image();
-    yellowPlanet.src = 'images/yellowPlanet.png'
+    yellowPlanet.src = '/images/yellowPlanet.png';
 
     let blackHole = new Image();
-    blackHole.src = 'images/blackHole2.png'
-
+    blackHole.src = '/images/blackHole2.png';
 
     //Variables
     let frogX = 208;
@@ -41,24 +38,34 @@ function start() {
     let isRightArrow = false;
     let isLeftArrow = false;
     let isUpArrow = false;
+    let isDownArrow = false;
 
-        // Press arrowkey
+    // Press arrowkey
     document.addEventListener('keydown', function(event) {
         console.log('Key pressed', event);
             if (event.key === 'ArrowRight') {
                 isRightArrow = true;
                 isLeftArrow = false;
                 isUpArrow = false;
+                isDownArrow = false;
             }
             else if (event.key === 'ArrowLeft') {
                 isLeftArrow = true;
                 isRightArrow = false;
                 isUpArrow = false;
+                isDownArrow = false;
             }
             else if (event.key === 'ArrowUp') {
                 isUpArrow = true;
                 isLeftArrow = false;
                 isRightArrow = false;
+                isDownArrow = false;
+            }
+            else if (event.key === 'ArrowDown') {
+                isUpArrow = false;
+                isLeftArrow = false;
+                isRightArrow = false;
+                isDownArrow = true;
             }
     })
             
@@ -67,6 +74,7 @@ function start() {
         isUpArrow = false;
         isLeftArrow = false;
         isRightArrow = false;
+        isDownArrow = false;
                 
     })
 
@@ -89,11 +97,15 @@ function start() {
                 else if (isUpArrow && frogY > 10) {
                     frogY -= 1;
                 }
+                else if (isDownArrow && frogY + frogWidth < canvas.height) {
+                    frogY++;
+                }
             }
             else {
-                //Insert gameover-function later
+                //Insert gameover-function later. How to make this work?
+                // main().removeGameScreen;
+                // main().createGOScreen;
                 console.log('Game over!');
-                //main.removeGameScreen(); -> to go the game over screen!
             }
         }
     }
@@ -108,6 +120,7 @@ function start() {
         ctx.drawImage(blackHole, halfWidth - 50, 300 - 40, 100, 80);
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
         froggerMovement();
+ 
     }
 
     intervalId = setInterval(() => {

@@ -48,6 +48,7 @@ body {
 .lead {
   padding: 20px;
   font-size: 14px;
+  line-height: 25px;
 }
 
 #start-btn {
@@ -77,11 +78,12 @@ body {
 }
 
 .canvas-container {
-  margin: 100px;
+  margin: 20px;
+  margin-bottom: 0px;
 }
 
 
 /* GameOver */
 .mainGameOver {
-  mainGameOver
+  
 }

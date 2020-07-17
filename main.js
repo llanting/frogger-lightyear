@@ -18,11 +18,12 @@ function main() {
             <main class="splashScreen">
                 <div class="title jumbotron">
                     <h1 class="display-4">Frogger Lightyear</h1>
-                    <p class="lead">Frogger has been on an amazing space-adventure. Reach the top and help him come home safe. But watch out for asteroids and a black hole...</p>
+                    <p class="lead">Frogger has been on an amazing space-adventure. Reach the top and help him get home safe. But watch out for asteroids and that black hole...</p>
                     <div>
                         <h3 class="keyHead">Keys</h3>
                         <ul class='keys'>
                             <li>Arrow Up = Up</li>
+                            <li>Arrow Down = Down</li>
                             <li>Arrow Left = Left</li>
                             <li>Arrow Right = Right</li>
                         </ul>
@@ -60,19 +61,20 @@ function main() {
                 <img src="images/life.png" alt='life' class="lives">
             </div> 
             <div class="canvas-container">
-                <canvas id='game-canvas' width="450" height="500"></canvas>
+                <canvas id='game-canvas' width="450" height="600"></canvas>
             </div>
-            <button id="gameover-btn" class ="button">gameover</button>
+            <button id="go-btn" class ="button">PLAY AGAIN?</button>
         </main>`);
         
         bodyIndex.prepend(gameScreen);
 
-        let gameOverBtn = gameScreen.querySelector('#gameover-btn');
+        let goBtn = gameScreen.querySelector('#go-btn');
 
-        gameOverBtn.addEventListener('click', function() {
+        goBtn.addEventListener('click', function() {
             removeGameScreen();
             createGOScreen();
-        })
+        });
+
         return gameScreen;
     };
 
@@ -102,7 +104,7 @@ function main() {
             removeGOScreen();
             createSplashScreen();
         });
-
+        return gameOverScreen;
     };
 
     function removeGOScreen() {
