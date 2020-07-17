@@ -7,11 +7,11 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 
 ## MVP (DOM - CANVAS)
 
-- Game has a frogger that moves vertically, upwards, when using arrowkeys
+- +Game has a frogger that moves vertically, upwards, when using arrowkeys
 - Asteroids move horizontally from left to right on one line, and right to left on another line
 - Multiple asteroids on one line
 - Lines have differents speeds
-- Two fixed position planets where the frogger is safe
+- +Two fixed position planets where the frogger is safe
 - One Black Hole in between the planets that will 'game over' the player when it is hit
 - Planet at the top that will end the game when reached
 - Start with an amount of points that will decrease every second
@@ -31,27 +31,29 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 
 # main.js
 
-<!-- create dom for start screen, including button (with high border radius for circle) and name (changing from frogs to letters) -->
+<!-- button (with high border radius for circle) and name (changing from frogs to letters) -->
 - createSplashScreen () {}
 
-<!-- create dom for screen with canvas, score and lives -->
-- createGameScreen () {}
+- +createGameScreen () {}
 
-<!-- create dom: game over/you win (same tactic as chronometer change), score and restart button -->
+<!-- game over/you win (same tactic as chronometer change), score and restart button -->
 - createGameOverScreen () {}
 
-<!-- function for game logic, i.e. when to load which screen -->
-- startGame() {}
+- +startGame() {}
 
 # game.js
 
 <!-- creating all variables -->
  - gameVars() {}
 
-<!-- Drawing canvas and ctx, adding background -->
- - drawCanvas() {}
+ - +drawCanvas() {}
 
- <!-- setting start-position -->
+<!-- Drawing three fixed position planets -->
+ - planet() { x, y, direction, size }
+ - blackhole() { x, y, direction, size }
+ - homePlanet() { x, y, direction, size }
+
+<!-- setting start-position -->
  - updateCanvas() {}
 
 <!-- setting gameloop, addEventListeners for keys -->
@@ -101,16 +103,6 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 <!-- screen collission, asteroids in array -> remove from array -->
 - checkScreenCollision() {}
 
-
-# planet.js
-
-<!-- creating and adding planets to canvas -->
-- planet() { x, y, direction, size }
-- blackhole() { x, y, direction, size }
-- homePlanet() { x, y, direction, size }
-
-<!-- drawing on canvas -->
-- draw() {}
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)

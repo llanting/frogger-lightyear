@@ -65,7 +65,7 @@
 //             <div>
 //                 <h3>GAME OVER!</h3>
 //                 <p>Frogger Lightyear floats in space for ever...</p>
-//                 <p>Your scored ${totalScore}</p>
+//                 <p>`You scored ${totalScore} points`</p>
 //             </div> 
 //             <div>
 //                 <button id="reset-btn" class ="button">RESTART</button>
@@ -111,7 +111,6 @@
 // }
 
 // window.addEventListener("load", "main");
-
 
 
 

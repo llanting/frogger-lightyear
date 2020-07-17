@@ -1,10 +1,3 @@
-// function start() {
-//     froggerMovement();
-    
-
-    
-// }
-
 // Draw canvas
 let canvas = document.getElementById('gameCanvas');
 canvas.style.border = '5px solid lightblue';
@@ -39,49 +32,49 @@ blackHole.src = 'images/blackHole.png'
 //Variables
 let frogX = 208;
 let frogY = 560;
-let froghalfWidth = 35/2;
+let frogWidth = 35;
 let halfWidth = canvas.width/2; 
 
-let isrightArrow = false;
-let isleftArrow = false;
-let isupArrow = false;
+let isRightArrow = false;
+let isLeftArrow = false;
+let isUpArrow = false;
 
     // Press arrowkey
 document.addEventListener('keydown', function(event) {
     console.log('Key pressed', event);
         if (event.key === 'ArrowRight') {
-            isrightArrow = true;
-            isleftArrow = false;
-            isupArrow = false;
+            isRightArrow = true;
+            isLeftArrow = false;
+            isUpArrow = false;
         }
         else if (event.key === 'ArrowLeft') {
-            isleftArrow = true;
-            isrightArrow = false;
-            isupArrow = false;
+            isLeftArrow = true;
+            isRightArrow = false;
+            isUpArrow = false;
         }
         else if (event.key === 'ArrowUp') {
-            isupArrow = true;
-            isleftArrow = false;
-            isrightArrow = false;
+            isUpArrow = true;
+            isLeftArrow = false;
+            isRightArrow = false;
         }
 })
         
 // Release arrowkey
 document.addEventListener('keyup', function(event) {
-    isupArrow = false;
-    isleftArrow = false;
-    isrightArrow = false;
+    isUpArrow = false;
+    isLeftArrow = false;
+    isRightArrow = false;
             
 })
 
 function froggerMovement() {
-    if (isrightArrow) {
+    if (isRightArrow && frogX < canvas.width - frogWidth) {
         frogX++;
     }
-    else if (isleftArrow) {
+    else if (isLeftArrow && frogX > 0) {
         frogX -= 1;
     }
-    else if (isupArrow) {
+    else if (isUpArrow && frogY > 10) {
         frogY -= 1;
     }
 }
@@ -94,7 +87,7 @@ function draw() {
     ctx.drawImage(bluePlanet, 30, 300 - 40, 80, 80);
     ctx.drawImage(yellowPlanet, 330, 300 - 40, 80, 80);
     ctx.drawImage(blackHole, halfWidth - 50, 300 - 40, 100, 80);
-    ctx.drawImage(frogger, frogX, frogY, 35, 35);
+    ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
     froggerMovement();
 }
 
@@ -102,7 +95,6 @@ intervalId = setInterval(() => {
     requestAnimationFrame(draw);
     
 }, 10)
-
 
 
 
