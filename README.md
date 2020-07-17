@@ -41,7 +41,7 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 - createGameOverScreen () {}
 
 <!-- function for game logic, i.e. when to load which screen -->
-- starGame() {}
+- startGame() {}
 
 # game.js
 
@@ -69,7 +69,7 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
  - addAsteroid() {}
 
 <!-- calculating score -->
-- calculateScor() {}
+- calculateScore() {}
 
 # frogger.js
 
@@ -84,6 +84,10 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 <!-- preventing screen collission -->
 - checkScreenCollision() {}
 
+- checkCollisionAsteroid() {}
+
+- checkCollissionPlanet() {}
+
 # asteroid.js
 
 - asteroid() { x, y, direction, size }
@@ -93,6 +97,9 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 
 <!-- determining asteroid movement, left to right, right to left -->
 - move() {}
+
+<!-- screen collission, asteroids in array -> remove from array -->
+- checkScreenCollision() {}
 
 
 # planet.js
@@ -104,9 +111,6 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 
 <!-- drawing on canvas -->
 - draw() {}
-
-<!-- checking collision blackhole (game over) and homeplanet (win) -->
-- checkCollisions() {}
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)

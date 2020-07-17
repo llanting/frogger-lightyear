@@ -1,0 +1,18 @@
+html,
+body {
+  height: 100%;
+}
+
+
+body {
+    background-color: rgb(1, 0, 32); 
+    color: white;
+    margin: 0;
+    padding: 0;
+   
+}
+
+.lives {
+    width: 50px;
+    height: auto;
+}
