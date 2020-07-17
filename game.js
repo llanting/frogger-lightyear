@@ -26,7 +26,7 @@ let yellowPlanet = new Image();
 yellowPlanet.src = 'images/yellowPlanet.png'
 
 let blackHole = new Image();
-blackHole.src = 'images/blackHole.png'
+blackHole.src = 'images/blackHole2.png'
 
 
 //Variables
@@ -68,14 +68,29 @@ document.addEventListener('keyup', function(event) {
 })
 
 function froggerMovement() {
-    if (isRightArrow && frogX < canvas.width - frogWidth) {
-        frogX++;
+    
+    //Check for location of 'home'
+    if (frogY === 10) {
+        //Insert win-function later
+        console.log('You win!');
     }
-    else if (isLeftArrow && frogX > 0) {
-        frogX -= 1;
-    }
-    else if (isUpArrow && frogY > 10) {
-        frogY -= 1;
+    else {
+        //Checks for location of black hole
+        if ((frogX + frogWidth < 175 || frogX > 275) || (frogY + frogWidth < 260 || frogY > 340)) {
+            if (isRightArrow && frogX < canvas.width - frogWidth) {
+                frogX++;
+            }
+            else if (isLeftArrow && frogX > 0) {
+                frogX -= 1;
+            }
+            else if (isUpArrow && frogY > 10) {
+                frogY -= 1;
+            }
+        }
+        else {
+            //Insert gameover-function later
+            console.log('Game over!');
+        }
     }
 }
 
