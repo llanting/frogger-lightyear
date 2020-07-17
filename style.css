@@ -66,7 +66,22 @@ body {
 }
 
 /* Game */
+
+.score-lives {
+  margin-top: 50px;
+}
+
 .lives {
   width: 50px;
   height: auto;
+}
+
+.canvas-container {
+  margin: 100px;
+}
+
+
+/* GameOver */
+.mainGameOver {
+  mainGameOver
 }

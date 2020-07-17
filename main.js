@@ -33,13 +33,14 @@ function main() {
                 </div>
             </main>`);
 
-        bodyIndex.appendChild(splashScreen);
+        bodyIndex.prepend(splashScreen);
 
         let startBtn = splashScreen.querySelector('#start-btn');
 
         startBtn.addEventListener('click', function() {
             removeSplashScreen();
             createGameScreen();
+            start();
         });
 
     };
@@ -51,20 +52,20 @@ function main() {
     function createGameScreen() {
         gameScreen = buildPage(`
         <main>
-            <div class='counter'>
+            <div class='score-lives'>
                 <span class='score'>Score:</span>
                 <span class='score'>Lives:</span>
                 <img src="images/life.png" alt='life' class="lives">
                 <img src="images/life.png" alt='life' class="lives">
                 <img src="images/life.png" alt='life' class="lives">
             </div> 
-            <div>
-                <canvas id='gameCanvas' width="450" height="500"></canvas>
+            <div class="canvas-container">
+                <canvas id='game-canvas' width="450" height="500"></canvas>
             </div>
             <button id="gameover-btn" class ="button">gameover</button>
         </main>`);
         
-        bodyIndex.appendChild(gameScreen);
+        bodyIndex.prepend(gameScreen);
 
         let gameOverBtn = gameScreen.querySelector('#gameover-btn');
 
@@ -72,7 +73,7 @@ function main() {
             removeGameScreen();
             createGOScreen();
         })
-
+        return gameScreen;
     };
 
     function removeGameScreen() {
@@ -82,21 +83,18 @@ function main() {
     function createGOScreen() {
         gameOverScreen = buildPage(`
         <main>
-            <div>
+            <div class="jumbotron">
                 <h3>GAME OVER!</h3>
                 <p>Frogger Lightyear floats in space for ever...</p>
-                
             </div> 
-            <div>
-                <button id="restart-btn" class ="button">RESTART</button>
-            </div>
-            <div>
+            <div class="main">
+                <button id="restart-btn" class ="button">PLAY AGAIN?</button>
                 <p>In honor of Frogger</p>
                 <p>Lanette &copy 2020</p>
             </div>
         </main>`);
 
-        bodyIndex.appendChild(gameOverScreen);
+        bodyIndex.prepend(gameOverScreen);
 
         let restartBtn = gameOverScreen.querySelector('#restart-btn');
 
@@ -116,3 +114,4 @@ function main() {
 }
 
 window.addEventListener("load", main)
+
