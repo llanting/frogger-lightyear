@@ -31,40 +31,82 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 
 # main.js
 
+<!-- create dom for start screen, including button (with high border radius for circle) and name (changing from frogs to letters) -->
 - createSplashScreen () {}
+
+<!-- create dom for screen with canvas, score and lives -->
 - createGameScreen () {}
+
+<!-- create dom: game over/you win (same tactic as chronometer change), score and restart button -->
 - createGameOverScreen () {}
+
+<!-- function for game logic, i.e. when to load which screen -->
+- starGame() {}
 
 # game.js
 
- - game() {}
+<!-- creating all variables -->
+ - gameVars() {}
+
+<!-- Drawing canvas and ctx, adding background -->
  - drawCanvas() {}
+
+ <!-- setting start-position -->
  - updateCanvas() {}
- - clearCanvas() {}
- - checkCollisions() {}
- - gameOver() {}
+
+<!-- setting gameloop, addEventListeners for keys -->
  - loop() {}
+
+ - clearCanvas() {}
+
+ <!-- declaring points of collissions and enabling lives - 1 -->
+ - checkCollisions() {}
+
+ <!-- declaring game over function (0 lives / black hole / time === 0) -->
+ - gameOver() {}
+
+<!-- creating asteroids during the game (look at flappy bird example) -->
  - addAsteroid() {}
- 
+
+<!-- calculating score -->
+- calculateScor() {}
+
 # frogger.js
 
-- frogger() { this.x; this.y; this.direction; this.size }
+- frogger() { x, y, direction, size }
+
+<!-- creating and adding frogger to canvas -->
 - draw() {}
+
+<!-- determining frog movement -->
 - move() {}
+
+<!-- preventing screen collission -->
 - checkScreenCollision() {}
 
 # asteroid.js
 
-- asteroid() { this.x; this.y; this.direction; this.size }
+- asteroid() { x, y, direction, size }
+
+<!-- creating and adding asteroids to canvas -->
 - draw() {}
+
+<!-- determining asteroid movement, left to right, right to left -->
 - move() {}
+
 
 # planet.js
 
-- planet() { this.x; this.y; this.direction; this.size }
-- blackhole() { this.x; this.y; this.direction; this.size }
-- homePlanet() { this.x; this.y; this.direction; this.size }
+<!-- creating and adding planets to canvas -->
+- planet() { x, y, direction, size }
+- blackhole() { x, y, direction, size }
+- homePlanet() { x, y, direction, size }
+
+<!-- drawing on canvas -->
 - draw() {}
+
+<!-- checking collision blackhole (game over) and homeplanet (win) -->
+- checkCollisions() {}
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)
@@ -104,9 +146,9 @@ Definition of the different states and their transition (transition functions)
 [Link url](https://trello.com/b/qnVwRRu1/frogger-lightyear)
 
 ### Git
-URls for the project repo and deploy
-[Link Repo](https://github.com/llanting/frogger-lightyear)
-[Link Deploy]()
+URls for the project repo and deploy:
+- Link Repo](https://github.com/llanting/frogger-lightyear)
+- [Link Deploy]()
 
 ### Slides
 URls for the project presentation
