@@ -60,9 +60,9 @@ function main() {
             <div class='score-lives'>
                 <span class='score'>Score:</span>
                 <span class='score'>Lives:</span>
-                <img src="images/life.png" alt='life' class="lives">
-                <img src="images/life.png" alt='life' class="lives">
-                <img src="images/life.png" alt='life' class="lives">
+                <img src="/images/frogger.png" alt='life' class="lives">
+                <img src="/images/frogger.png" alt='life' class="lives">
+                <img src="/images/frogger.png" alt='life' class="lives">
             </div> 
             <div class="canvas-container">
                 <canvas id='game-canvas' width="450" height="600"></canvas>
@@ -108,7 +108,7 @@ function main() {
             removeGOScreen();
             createSplashScreen();
         });
-        return gameOverScreen;
+        
     };
 
     function removeGOScreen() {

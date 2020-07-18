@@ -31,7 +31,7 @@ function start() {
     let astImg = new Image();
     astImg.src = '/images/astSmall.png';
 
-    // Asteroids rows
+    // Asteroids rows -> need to draw these inside of circles
     let ast5 = [{x:-30, y: 360}];
     let ast6 = [{x:500, y: 410}];
     let ast7 = [{x:-30, y: 460}];
@@ -42,7 +42,10 @@ function start() {
     let frogY = 560;
     let frogWidth = 35;
     let halfWidth = canvas.width/2; 
+    let bHX = 225;
+    let bHY = 300;
     let blackHoleR = 50;
+    let lives = 3;
 
     let isRightArrow = false;
     let isLeftArrow = false;
@@ -90,7 +93,7 @@ function start() {
             }
     })
             
-    // Release arrowkey
+    // Release arrowkey eventListener
     document.addEventListener('keyup', function(event) {
         isUpArrow = false;
         isLeftArrow = false;
@@ -99,42 +102,80 @@ function start() {
                 
     })
 
-    function froggerMovement() {
-        
-        //Check for location of 'home'
-        if (frogY === 10) {
-            //Insert win-function later. If you win, change values of title
-            console.log('You win!');
+    //Check black hole collision
+    function checkBlackHoleCollision() {
+        //Check closest edge and save in variabel
+        let closestX = bHX;
+        let closestY = bHY;
+
+        if (bHX < frogX) {
+            closestX = frogX;
+        }
+        else if (bHX > frogX + frogWidth) {
+            closestX = frogX + frogWidth;
+        }
+
+        if (bHY < frogY) {
+            closestY = frogY;
+        }
+        else if (bHY > frogY + frogWidth) {
+            closestY = frogY + frogWidth;
+        }
+
+        //Check distance
+        let distX = bHX - closestX;
+        let distY = bHY - closestY;
+        let calcDistance = (distX*distX) + (distY*distY);
+        let distance = Math.sqrt(calcDistance);
+
+        //If distance is smaller than radius, collision is true
+        if (distance <= blackHoleR) {
+            return true;
         }
         else {
-            //Checks for location of black hole
-            //
-            if ((frogX + frogWidth < 225 - blackHoleR || frogX > 225 + blackHoleR) || (frogY + frogWidth < 300 - blackHoleR || frogY > 300 + blackHoleR)) {
-                if (isRightArrow && frogX < canvas.width - frogWidth) {
-                    frogX += 2;
-                }
-                else if (isLeftArrow && frogX > 0) {
-                    frogX -= 2;
-                }
-                else if (isUpArrow && frogY > 10) {
-                    frogY -= 2;
-                }
-                else if (isDownArrow && frogY + frogWidth < canvas.height) {
-                    frogY += 2;
-                }
+            return false;
+        }
+    }
+
+    function froggerMovement() {
+        //Check if enough lives
+        if (lives > 0) {
+            //Check for location of 'home'
+            if (frogY === 10) {
+                //Insert win-function later. If you win, change values of title
+                console.log('You win!');
             }
             else {
-                //Insert gameover-function later. How to make this work?
-                // main().removeGameScreen;
-                // main().createGOScreen;
-                clearInterval(intervalId);
-                console.log('Game over!');
+                //Checks for location of black hole, how to do for cirlce?!
+                if (!checkBlackHoleCollision()) {
+                    if (isRightArrow && frogX < canvas.width - frogWidth) {
+                        frogX += 2;
+                    }
+                    else if (isLeftArrow && frogX > 0) {
+                        frogX -= 2;
+                    }
+                    else if (isUpArrow && frogY > 10) {
+                        frogY -= 2;
+                    }
+                    else if (isDownArrow && frogY + frogWidth < canvas.height) {
+                        frogY += 2;
+                    }
+                }
+                else {
+                    //Insert gameover-function. How to make this work?
+                    clearInterval(intervalId);
+                    //main().createGOScreen(); // goes back to splashScreen (because it is default?)
+                    console.log('Game over!');
+                }
             }
+        }
+        else {
+            clearInterval(intervalId);
+            console.log('Game over!');
         }
     }
 
     //Asteroid draw function, 8 times for 8 lines
-
     // Line 5
     function drawAsteroid5() {
         for (let i=0; i < ast5.length; i++) {
@@ -151,7 +192,7 @@ function start() {
                 });
             }
 
-            // Collision logic
+            // Collision logic. Use 'lives'-- to update the livescore. & change img of 'lives' in DOM: document.querySelectorAll('.lives').src='/images/froggerDead.png';
         }
     }
 
@@ -221,7 +262,7 @@ function start() {
         ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
         ctx.drawImage(baseImg, halfWidth - 100, 550, 200, 100);
         ctx.drawImage(homeImg, -20, -40, 500, 100);
-        ctx.drawImage(bluePlanet, 30, 300 - 40, 80, 80);
+        ctx.drawImage(bluePlanet, 40, 300 - 40, 80, 80);
         ctx.drawImage(yellowPlanet, 330, 300 - 40, 80, 80);
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
         
@@ -230,13 +271,11 @@ function start() {
         drawAsteroid6();
         drawAsteroid5();
         
-
         froggerMovement();
 
-        //ctx.drawImage(blackHole, 225, 300, 100, 100);
-        //Draw circle for blackHole
+        //Draw circle for blackHole & insert img
         ctx.beginPath();
-        ctx.arc(225, 300, blackHoleR, 0, Math.PI*2);
+        ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
         let blackHole = new Image();
         blackHole.src = '/images/rsz_2blackhole3.png';
         let blackHolepattern = ctx.createPattern(blackHole, "repeat");
@@ -253,10 +292,10 @@ function start() {
 
 
     //Play music after 3 seconds 
-    setTimeout(() => {
-        bgMusic.volume = 0.1;
-        bgMusic.play();
-    }, 3000);
+    // setTimeout(() => {
+    //     bgMusic.volume = 0.1;
+    //     bgMusic.play();
+    // }, 3000);
     
 }
 
