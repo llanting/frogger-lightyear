@@ -38,7 +38,11 @@ function main() {
 
         let startBtn = splashScreen.querySelector('#start-btn');
 
+        let startMusic = new Audio('/music/coinin.wav');
+
         startBtn.addEventListener('click', function() {
+            startMusic.volume = 0.1;
+            startMusic.play();
             removeSplashScreen();
             createGameScreen();
             start();
