@@ -56,18 +56,20 @@ function main() {
 
     function createGameScreen() {
         gameScreen = buildPage(`
-        <main>
-            <div class='score-lives'>
-                <span class='score'>Score:</span>
-                <span class='score'>Lives:</span>
-                <img src="/images/frogger.png" alt='life' class="lives">
-                <img src="/images/frogger.png" alt='life' class="lives">
-                <img src="/images/frogger.png" alt='life' class="lives">
-            </div> 
-            <div class="canvas-container">
-                <canvas id='game-canvas' width="450" height="600"></canvas>
+        <main class="gamescreen">
+            <div class="heightset">
+                <div class='score-lives'>
+                    <span class='score'>Score:</span>
+                    <span class='score'>Lives:</span>
+                    <img src="/images/frogger.png" alt='life' class="lives">
+                    <img src="/images/frogger.png" alt='life' class="lives">
+                    <img src="/images/frogger.png" alt='life' class="lives">
+                </div> 
+                <div class="canvas-container">
+                    <canvas id='game-canvas' width="450" height="600"></canvas>
+                </div>
+                <button id="go-btn" class ="button">PLAY AGAIN?</button>
             </div>
-            <button id="go-btn" class ="button">PLAY AGAIN?</button>
         </main>`);
         
         bodyIndex.prepend(gameScreen);
@@ -84,19 +86,18 @@ function main() {
 
     function removeGameScreen() {
         gameScreen.remove();
+        
     }
 
     function createGOScreen() {
         gameOverScreen = buildPage(`
-        <main>
+        <main class="background-gameover">
             <div class="jumbotron">
                 <h3>GAME OVER!</h3>
-                <p>Frogger Lightyear floats in space for ever...</p>
-            </div> 
-            <div class="main">
-                <button id="restart-btn" class ="button">PLAY AGAIN?</button>
-                <p>In honor of Frogger</p>
-                <p>Lanette &copy 2020</p>
+                <p class="lead">Frogger Lightyear floats in space for ever...</p>
+                <button id="restart-btn" class ="button btn btn-danger">PLAY AGAIN?</button>
+                <p class="honor">In honor of Frogger</p>
+                <p class="mention">Lanette &copy 2020</p>
             </div>
         </main>`);
 

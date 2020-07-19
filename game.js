@@ -6,7 +6,7 @@ function start() {
     let ctx = canvas.getContext('2d');
     ctx.globalCompositeOperation = 'source-over';
 
-    let intervalID = 0;
+    let intervalId = 0;
 
     // Load images
     let bgImg = new Image();
@@ -102,6 +102,20 @@ function start() {
                 
     })
 
+    //Draw black hole
+    function drawBlackHole(){
+        ctx.beginPath();
+        ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
+        let blackHole = new Image();
+        blackHole.src = '/images/blackHoletest.png';
+        let blackHolepattern = ctx.createPattern(blackHole, "repeat");
+        ctx.fillStyle = blackHolepattern;
+        ctx.fill();
+        
+        ctx.stroke();
+        ctx.closePath();
+    }
+
     //Check black hole collision
     function checkBlackHoleCollision() {
         //Check closest edge and save in variabel
@@ -137,45 +151,22 @@ function start() {
         }
     }
 
-    function froggerMovement() {
-        //Check if enough lives
-        if (lives > 0) {
-            //Check for location of 'home'
-            if (frogY === 10) {
-                //Insert win-function later. If you win, change values of title
-                console.log('You win!');
-            }
-            else {
-                //Checks for location of black hole, how to do for cirlce?!
-                if (!checkBlackHoleCollision()) {
-                    if (isRightArrow && frogX < canvas.width - frogWidth) {
-                        frogX += 2;
-                    }
-                    else if (isLeftArrow && frogX > 0) {
-                        frogX -= 2;
-                    }
-                    else if (isUpArrow && frogY > 10) {
-                        frogY -= 2;
-                    }
-                    else if (isDownArrow && frogY + frogWidth < canvas.height) {
-                        frogY += 2;
-                    }
-                }
-                else {
-                    //Insert gameover-function. How to make this work?
-                    clearInterval(intervalId);
-                    //main().createGOScreen(); // goes back to splashScreen (because it is default?)
-                    console.log('Game over!');
-                }
-            }
+    function moveFrogger() {
+        if (isRightArrow && frogX < canvas.width - frogWidth) {
+            frogX += 2;
         }
-        else {
-            clearInterval(intervalId);
-            console.log('Game over!');
+        else if (isLeftArrow && frogX > 0) {
+            frogX -= 2;
+        }
+        else if (isUpArrow && frogY > 10) {
+            frogY -= 2;
+        }
+        else if (isDownArrow && frogY + frogWidth < canvas.height) {
+            frogY += 2;
         }
     }
 
-    //Asteroid draw function, 8 times for 8 lines
+    //Asteroid draw functions, 8 times for 8 lines
     // Line 5
     function drawAsteroid5() {
         for (let i=0; i < ast5.length; i++) {
@@ -256,9 +247,35 @@ function start() {
         }
     }
 
+    function checkFroggerLives() {
+        //Check if enough lives
+        if (lives > 0) {
+            //Check for location of 'home'
+            if (frogY === 10) {
+                //Insert win-function later. If you win, change values of title of GOScreen
 
-    // Draw images
-    function draw() {
+                console.log('You win!');
+            }
+            else {
+                //Checks for location of black hole, how to do for cirlce?!
+                if (!checkBlackHoleCollision()) {
+                    moveFrogger();
+                }
+                else {
+                    console.log('Game over!');
+                    //Insert gameover-function. How to make this work?
+                    clearInterval(intervalId);
+                    //main().createGOScreen(); // goes back to splashScreen (because it is default?)
+                }
+            }
+        }
+        else {
+            clearInterval(intervalId);
+            console.log('Game over!');
+        }
+    }
+
+    function drawCanvas() {
         ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
         ctx.drawImage(baseImg, halfWidth - 100, 550, 200, 100);
         ctx.drawImage(homeImg, -20, -40, 500, 100);
@@ -266,27 +283,18 @@ function start() {
         ctx.drawImage(yellowPlanet, 330, 300 - 40, 80, 80);
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
         
+        drawBlackHole();
         drawAsteroid8();
         drawAsteroid7();
         drawAsteroid6();
         drawAsteroid5();
         
-        froggerMovement();
-
-        //Draw circle for blackHole & insert img
-        ctx.beginPath();
-        ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
-        let blackHole = new Image();
-        blackHole.src = '/images/rsz_2blackhole3.png';
-        let blackHolepattern = ctx.createPattern(blackHole, "repeat");
-        ctx.fillStyle = blackHolepattern;
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
+        checkFroggerLives();
+        
     }
 
     intervalId = setInterval(() => {
-        requestAnimationFrame(draw);
+        requestAnimationFrame(drawCanvas);
         
     }, 20)
 
@@ -300,6 +308,4 @@ function start() {
 }
 
 window.addEventListener("load", start)
-
-
 
