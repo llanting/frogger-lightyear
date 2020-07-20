@@ -50,21 +50,16 @@ function start() {
     let bHY = 300;
     let blackHoleR = 50;
 
-    //Variables score
+    //Variables score and lives
     let lives = 3;
     let score = 3000;
     let highscore = 0;
-    localStorage.setItem("highscore", 0);
-    highscore = localStorage.getItem('highscore');
+    highscore = window.localStorage.getItem("highscore");
+
 
     function getHighScore() {
-        if (highscore !== null) {
-            if (score > highscore) {
-                localStorage.setItem('highscore', score);
-            }
-        }
-        else {
-            localStorage.setItem('highscore', score)
+        if (score > highscore) {
+            window.localStorage.setItem('highscore', JSON.stringify(score));
         }
     }
 
@@ -387,48 +382,39 @@ function start() {
         }
     }
 
+    function gameOver() {
+        clearInterval(intervalId);
+        clearInterval(intervalIdTwo);
+        removeGameScreen();
+        createGOScreen();
+        document.querySelector('.end-score').innerText = `Your score: ${score}`;
+        getHighScore();
+        document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+    }
+
     function checkNumberLives() {
         if (lives < 0) {
-            clearInterval(intervalId);
-            clearInterval(intervalIdTwo);
-            removeGameScreen();
-            createGOScreen();
-            document.querySelector('.end-score').innerText = `Your score: ${score}`;
-            getHighScore();
-            document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+            gameOver();
         }
         else {
             lives -= 1;
             let score = document.querySelector('.lives');
-            score.parentNode.removeChild(score);
-
+            score.parentNode.removeChild(score);  
         }
     }
 
     function checkFroggerWin() {
         if (frogY < 15 && frogX > 100 & frogX < 500) {
             score += 500;
-            clearInterval(intervalId);
-            clearInterval(intervalIdTwo);
-            removeGameScreen();
-            createWinScreen();
-            document.querySelector('.end-score').innerText = `Score: ${score}`
-            getHighScore();
-            document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
-            
+            gameOver();
         }
         else {
             if (!checkBlackHoleCollision()) {
                 moveFrogger();
             }
             else {
-                clearInterval(intervalId);
-                clearInterval(intervalIdTwo);
-                removeGameScreen();
-                createGOScreen();
-                document.querySelector('.end-score').innerText = `Your score: ${score}`
+                gameOver();
                 getHighScore();
-                document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
             }
         }
     }
@@ -460,6 +446,7 @@ function start() {
         requestAnimationFrame(drawCanvas);   
     }, 20)
 
+    
     //Showing score from start
     function showScore() {
         document.querySelector('.score-num').innerText = `Score: ${score}`;
@@ -477,7 +464,7 @@ function start() {
         showScore();
     }, 1000)
     
-    //Play music after 3 seconds 
+    // //Play music after 3 seconds 
     // setTimeout(() => {
     //     bgMusic.volume = 0.1;
     //     bgMusic.play();
