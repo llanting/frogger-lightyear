@@ -285,7 +285,7 @@ function start() {
             ast2[i].x -= 1;
 
             if (ast2[i].x === -90) {
-                ast2.shift();
+                ast2.slice(0);
             }
             if (ast2[i].x === 150) {
                 ast2.push({
