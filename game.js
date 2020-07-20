@@ -373,28 +373,24 @@ function start() {
     }
 
     function checkFroggerLives() {
-        //Check if enough lives
         if (lives >= 0) {
-            //Check for location of 'home'
             if (frogY === 10) {
-                //Insert win-function later. If you win, change values of title of GOScreen
-
-                console.log('You win!');
+                createWinScreen();
+                
             }
             else {
                 if (!checkBlackHoleCollision()) {
                     moveFrogger();
                 }
                 else {
-                    console.log('Game over!');
                     clearInterval(intervalId);
-                    //main().createGOScreen(); // goes back to splashScreen (because it is default?)
+                    createGOScreen();
                 }
             }
         }
         else {
             clearInterval(intervalId);
-            console.log('Game over!');
+            createGOScreen();
         }
     }
 
