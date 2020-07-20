@@ -42,7 +42,7 @@ function start() {
     let ast7 = [{x:-30, y: 460}];
     let ast8 = [{x:500, y: 510}];
 
-    // Variables
+    // Variables imgs
     let frogX = 208;
     let frogY = 560;
     let frogWidth = 35;
@@ -50,9 +50,26 @@ function start() {
     let bHX = 225;
     let bHY = 300;
     let blackHoleR = 50;
+
+    //Variables score
     let lives = 3;
     let score = 3000;
+    let highscore = 0;
+    localStorage.setItem("highscore", 0);
+    highscore = localStorage.getItem('highscore');
 
+    function getHighScore() {
+        if (highscore !== null) {
+            if (score > highscore) {
+                localStorage.setItem('highscore', score);
+            }
+        }
+        else {
+            localStorage.setItem('highscore', score)
+        }
+    }
+
+    //Variables keys
     let isRightArrow = false;
     let isLeftArrow = false;
     let isUpArrow = false;
@@ -125,7 +142,7 @@ function start() {
 
     //Check black hole collision
     function checkBlackHoleCollision() {
-        //Check closest edge and save in variabel
+        //Check closest edge and save in variable
         let closestX = bHX;
         let closestY = bHY;
 
@@ -177,10 +194,7 @@ function start() {
     function checkAsteroidCollisionTop(astArr) {
         for (let i=0; i < astArr.length; i++) {
             if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 30) && (frogY < astArr[i].y + 30 && frogY + frogWidth > astArr[i].y)) {
-                lives -= 1;
-                
-                let score = document.querySelector('.lives');
-                score.parentNode.removeChild(score);
+                checkNumberLives();
 
                 if (frogX < canvas.width/2) {
                     frogX = 65;
@@ -198,11 +212,7 @@ function start() {
     function checkAsteroidCollisionBottom(astArr) {
         for (let i=0; i < astArr.length; i++) {
             if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 30) && (frogY < astArr[i].y + 30 && frogY + frogWidth > astArr[i].y)) {
-                lives -= 1;
-                
-                let score = document.querySelector('.lives');
-                score.parentNode.removeChild(score);
-
+                checkNumberLives();
                 frogX = 208;
                 frogY = 560;
             }
@@ -374,29 +384,49 @@ function start() {
         }
     }
 
-    function checkFroggerLives() {
-        if (lives >= 0) {
-            if (frogY === 10) {
-                score += 500;
-                createWinScreen();
-                document.querySelector('.end-score').innerText = `Score: ${score}`
-                
-            }
-            else {
-                if (!checkBlackHoleCollision()) {
-                    moveFrogger();
-                }
-                else {
-                    clearInterval(intervalId);
-                    createGOScreen();
-                    document.querySelector('.end-score').innerText = `Your score: ${score}`
-                }
-            }
+    function checkNumberLives() {
+        if (lives < 0) {
+            clearInterval(intervalId);
+            clearInterval(intervalIdTwo);
+            removeGameScreen();
+            createGOScreen();
+            document.querySelector('.end-score').innerText = `Your score: ${score}`;
+            getHighScore();
+            document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
         }
         else {
+            lives -= 1;
+            let score = document.querySelector('.lives');
+            score.parentNode.removeChild(score);
+
+        }
+    }
+
+    function checkFroggerWin() {
+        if (frogY === 10) {
+            score += 500;
             clearInterval(intervalId);
-            createGOScreen();
-            document.querySelector('.end-score').innerText = `Your score: ${score}`
+            clearInterval(intervalIdTwo);
+            removeGameScreen();
+            createWinScreen();
+            document.querySelector('.end-score').innerText = `Score: ${score}`
+            getHighScore();
+            document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+            
+        }
+        else {
+            if (!checkBlackHoleCollision()) {
+                moveFrogger();
+            }
+            else {
+                clearInterval(intervalId);
+                clearInterval(intervalIdTwo);
+                removeGameScreen();
+                createGOScreen();
+                document.querySelector('.end-score').innerText = `Your score: ${score}`
+                getHighScore();
+                document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+            }
         }
     }
 
@@ -419,8 +449,7 @@ function start() {
         drawAsteroid2();
         drawAsteroid1();
         
-        
-        checkFroggerLives();
+        checkFroggerWin();
         
     }
 
@@ -434,6 +463,8 @@ function start() {
         console.log(Math.floor(score));
         if (score < 0) {
             clearInterval(intervalIdTwo);
+            removeGameScreen();
+            createGOScreen();
         }
     }, 1000)
     
