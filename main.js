@@ -28,6 +28,7 @@ function createSplashScreen() {
                         <li>Arrow Left = Left</li>
                         <li>Arrow Right = Right</li>
                     </ul>
+                    <input type='text' id='name' name='name' placeholder='What is your name?'>
                 </div>
                 <div class="mainSplash">
                     <button id="start-btn" class ="button btn btn-danger">START</button>
@@ -63,7 +64,7 @@ function createGameScreen() {
     <main class="gamescreen">
         <div class="heightset">
             <div class='score-lives'>
-                <span class='score'>Score:</span>
+                <span class='score score-num'>Score:</span>
                 <span class='score'>Lives:</span>
                 <img src="/images/frogger.png" alt='life' class="lives life">
                 <img src="/images/frogger.png" alt='life' class="lives life">
@@ -92,6 +93,7 @@ function createGOScreen() {
         <div class="jumbotron">
             <h3 class="win-lose-text">GAME OVER!</h3>
             <p class="lead">Frogger Lightyear floats in space for ever...</p>
+            <p class="end-score"></p>
             <button id="restart-btn" class ="button btn btn-danger">PLAY AGAIN?</button>
             <p class="honor">In honor of Frogger</p>
             <p class="mention">Lanette &copy 2020</p>
@@ -119,6 +121,7 @@ function createWinScreen() {
         <div class="jumbotron">
             <h3 class="win-lose-text">YOU WIN!</h3>
             <p class="lead">Frogger Lightyear is reunited with his family!</p>
+            <p class="end-score"></p>
             <button id="restart-btn" class ="button btn btn-danger">PLAY AGAIN?</button>
             <p class="honor">In honor of Frogger</p>
             <p class="mention">Lanette &copy 2020</p>

@@ -7,6 +7,7 @@ function start() {
     ctx.globalCompositeOperation = 'source-over';
 
     let intervalId = 0;
+    let intervalIdTwo = 0;
 
     // Load images
     let bgImg = new Image();
@@ -50,6 +51,7 @@ function start() {
     let bHY = 300;
     let blackHoleR = 50;
     let lives = 3;
+    let score = 3000;
 
     let isRightArrow = false;
     let isLeftArrow = false;
@@ -375,7 +377,9 @@ function start() {
     function checkFroggerLives() {
         if (lives >= 0) {
             if (frogY === 10) {
+                score += 500;
                 createWinScreen();
+                document.querySelector('.end-score').innerText = `Score: ${score}`
                 
             }
             else {
@@ -385,12 +389,14 @@ function start() {
                 else {
                     clearInterval(intervalId);
                     createGOScreen();
+                    document.querySelector('.end-score').innerText = `Your score: ${score}`
                 }
             }
         }
         else {
             clearInterval(intervalId);
             createGOScreen();
+            document.querySelector('.end-score').innerText = `Your score: ${score}`
         }
     }
 
@@ -419,11 +425,18 @@ function start() {
     }
 
     intervalId = setInterval(() => {
-        requestAnimationFrame(drawCanvas);
-        
+        requestAnimationFrame(drawCanvas);   
     }, 20)
 
-
+    intervalIdTwo = setInterval(() => {
+        document.querySelector('.score-num').innerText = `Score: ${score}`;
+        score -= 10;
+        console.log(Math.floor(score));
+        if (score < 0) {
+            clearInterval(intervalIdTwo);
+        }
+    }, 1000)
+    
     //Play music after 3 seconds 
     // setTimeout(() => {
     //     bgMusic.volume = 0.1;
