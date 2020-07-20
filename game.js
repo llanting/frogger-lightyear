@@ -39,7 +39,7 @@ function start() {
     let ast5 = [{x:-30, y: 360}];
     let ast6 = [{x:500, y: 410}];
     let ast7 = [{x:-30, y: 460}];
-    let ast8 = [{x:300, y: 510}];
+    let ast8 = [{x:330, y: 510}];
 
     // Variables imgs
     let frogX = 208;
@@ -73,45 +73,46 @@ function start() {
     let bgMusic = new Audio('/music/backgroundmusic.mp3');
     let hopMusic = new Audio('/music/hop.wav')
 
+    function playHop() {
+        hopMusic.volume = 0.1;
+        hopMusic.play();
+    }
+
     // Press arrowkey eventListener
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', (event) => {
         console.log('Key pressed', event);
             if (event.key === 'ArrowRight') {
                 isRightArrow = true;
                 isLeftArrow = false;
                 isUpArrow = false;
                 isDownArrow = false;
-                hopMusic.volume = 0.1;
-                hopMusic.play();
+                playHop();
             }
             else if (event.key === 'ArrowLeft') {
                 isLeftArrow = true;
                 isRightArrow = false;
                 isUpArrow = false;
                 isDownArrow = false;
-                hopMusic.volume = 0.1;
-                hopMusic.play();
+                playHop();
             }
             else if (event.key === 'ArrowUp') {
                 isUpArrow = true;
                 isLeftArrow = false;
                 isRightArrow = false;
                 isDownArrow = false;
-                hopMusic.volume = 0.1;
-                hopMusic.play();
+                playHop();
             }
             else if (event.key === 'ArrowDown') {
                 isUpArrow = false;
                 isLeftArrow = false;
                 isRightArrow = false;
                 isDownArrow = true;
-                hopMusic.volume = 0.1;
-                hopMusic.play();
+                playHop();
             }
     })
             
     // Release arrowkey eventListener
-    document.addEventListener('keyup', function(event) {
+    document.addEventListener('keyup', (event) => {
         isUpArrow = false;
         isLeftArrow = false;
         isRightArrow = false;
@@ -124,7 +125,7 @@ function start() {
         ctx.beginPath();
         ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
         let blackHole = new Image();
-        blackHole.src = '/images/New Piskel-1.png (32).png';
+        blackHole.src = '/images/blackHoleDef.png';
         let blackHolepattern = ctx.createPattern(blackHole, "repeat");
         ctx.fillStyle = blackHolepattern;
         ctx.fill();
@@ -132,7 +133,6 @@ function start() {
         ctx.stroke();
         ctx.closePath();
     }
-
 
     //Check black hole collision
     function checkBlackHoleCollision() {
@@ -246,7 +246,7 @@ function start() {
             ctx.drawImage(astImg, ast2[i].x + 60, ast2[i].y);
             ast2[i].x -= 1;
 
-            if (ast2[i].x === -30) {
+            if (ast2[i].x === -90) {
                 ast2.shift();
             }
             if (ast2[i].x === 150) {
@@ -328,7 +328,7 @@ function start() {
             ctx.drawImage(astImg, ast6[i].x + 30, ast6[i].y);
             ast6[i].x -= 2;
 
-            if (ast6[i].x === -30) {
+            if (ast6[i].x === -60) {
                 ast6.shift();
             }
             if (ast6[i].x === 200) {
@@ -392,6 +392,17 @@ function start() {
         document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
     }
 
+    function gameWin() {
+        score += 500;
+        clearInterval(intervalId);
+        clearInterval(intervalIdTwo);
+        removeGameScreen();
+        createWinScreen();
+        document.querySelector('.end-score').innerText = `Your score: ${score}`;
+        getHighScore();
+        document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+    }
+
     function checkNumberLives() {
         if (lives < 0) {
             gameOver();
@@ -405,8 +416,7 @@ function start() {
 
     function checkFroggerWin() {
         if (frogY < 15 && frogX > 100 & frogX < 500) {
-            score += 500;
-            gameOver();
+            gameWin();
         }
         else {
             if (!checkBlackHoleCollision()) {

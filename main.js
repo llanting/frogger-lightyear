@@ -31,7 +31,7 @@ function createSplashScreen() {
                 </div>
                 <div class="mainSplash">
                     <button id="start-btn" class ="button btn btn-danger">START</button>
-                    <img class="frogLY" src="images/froggerLY.jpeg" alt='Frogger Lightyear'>
+                    <img class="frogLY" src="/images/froggerLY.jpeg" alt='Frogger Lightyear'>
             </div>
         </main>`);
 
