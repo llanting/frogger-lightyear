@@ -31,7 +31,11 @@ function start() {
     let astImg = new Image();
     astImg.src = '/images/astSmall.png';
 
-    // Asteroids rows -> need to draw these inside of circles
+    // Asteroids rows
+    let ast1 = [{x:-30, y: 70}];
+    let ast2 = [{x:500, y: 110}];
+    let ast3 = [{x:500, y: 160}];
+    let ast4 = [{x:-30, y: 210}];
     let ast5 = [{x:-30, y: 360}];
     let ast6 = [{x:500, y: 410}];
     let ast7 = [{x:-30, y: 460}];
@@ -116,6 +120,7 @@ function start() {
         ctx.closePath();
     }
 
+
     //Check black hole collision
     function checkBlackHoleCollision() {
         //Check closest edge and save in variabel
@@ -166,7 +171,126 @@ function start() {
         }
     }
 
-    //Asteroid draw functions, 8 times for 8 lines
+    // Check asteroids four top lines
+    function checkAsteroidCollisionTop(astArr) {
+        for (let i=0; i < astArr.length; i++) {
+            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 30) && (frogY < astArr[i].y + 30 && frogY + frogWidth > astArr[i].y)) {
+                lives -= 1;
+                
+                let score = document.querySelector('.lives');
+                score.parentNode.removeChild(score);
+
+                if (frogX < canvas.width/2) {
+                    frogX = 65;
+                    frogY = canvas.height /2 - frogWidth;
+                }
+                else {
+                    frogX = 350;
+                    frogY = canvas.height /2 - frogWidth;
+                }
+            }
+        }
+    } 
+
+    // Check asteroids four bottom lines
+    function checkAsteroidCollisionBottom(astArr) {
+        for (let i=0; i < astArr.length; i++) {
+            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 30) && (frogY < astArr[i].y + 30 && frogY + frogWidth > astArr[i].y)) {
+                lives -= 1;
+                
+                let score = document.querySelector('.lives');
+                score.parentNode.removeChild(score);
+
+                frogX = 208;
+                frogY = 560;
+            }
+        }
+    }
+
+    //Asteroid functions, 8 times for 8 lines
+    // Line 1
+    function drawAsteroid1() {
+        for (let i=0; i < ast1.length; i++) {
+            ctx.drawImage(astImg, ast1[i].x, ast1[i].y);
+            ast1[i].x += 2;
+
+            if (ast1[i].x === 630) {
+                ast1.slice(-1);
+            }
+            if (ast1[i].x === 300) {
+                ast1.push({
+                    x: -30,
+                    y: 70
+                });
+            }
+
+            checkAsteroidCollisionTop(ast1);
+        }
+    }
+
+    // Line 2
+    function drawAsteroid2() {
+        for (let i=0; i < ast2.length; i++) {
+            ctx.drawImage(astImg, ast2[i].x, ast2[i].y);
+            ctx.drawImage(astImg, ast2[i].x + 30, ast2[i].y);
+            ctx.drawImage(astImg, ast2[i].x + 60, ast2[i].y);
+            ast2[i].x -= 1;
+
+            if (ast2[i].x === -30) {
+                ast2.shift();
+            }
+            if (ast2[i].x === 150) {
+                ast2.push({
+                    x: 500,
+                    y: 110
+                });
+            }
+
+            checkAsteroidCollisionTop(ast2);
+        }
+    }
+
+    // Line 3
+    function drawAsteroid3() {
+        for (let i=0; i < ast3.length; i++) {
+            ctx.drawImage(astImg, ast3[i].x, ast3[i].y);
+            ast3[i].x -= 2;
+
+            if (ast3[i].x === -30) {
+                ast3.shift();
+            }
+            if (ast3[i].x === 300) {
+                ast3.push({
+                    x: 500,
+                    y: 160
+                });
+            }
+
+            checkAsteroidCollisionTop(ast3);
+        }
+    }
+
+    // Line 4
+    function drawAsteroid4() {
+        for (let i=0; i < ast4.length; i++) {
+            ctx.drawImage(astImg, ast4[i].x, ast4[i].y);
+            ctx.drawImage(astImg, ast4[i].x + 30, ast4[i].y);
+            ast4[i].x += 1;
+
+            if (ast4[i].x === 630) {
+                ast4.slice(-1);
+            }
+            if (ast4[i].x === 150) {
+                ast4.push({
+                    x: -30,
+                    y: 210
+                });
+            }
+
+            checkAsteroidCollisionTop(ast4);
+        }
+    }
+
     // Line 5
     function drawAsteroid5() {
         for (let i=0; i < ast5.length; i++) {
@@ -183,7 +307,7 @@ function start() {
                 });
             }
 
-            // Collision logic. Use 'lives'-- to update the livescore. & change img of 'lives' in DOM: document.querySelectorAll('.lives').src='/images/froggerDead.png';
+            checkAsteroidCollisionBottom(ast5);
         }
     }
 
@@ -191,6 +315,7 @@ function start() {
     function drawAsteroid6() {
         for (let i=0; i < ast6.length; i++) {
             ctx.drawImage(astImg, ast6[i].x, ast6[i].y);
+            ctx.drawImage(astImg, ast6[i].x + 30, ast6[i].y);
             ast6[i].x -= 2;
 
             if (ast6[i].x === -30) {
@@ -203,7 +328,7 @@ function start() {
                 });
             }
 
-            // Collision logic
+            checkAsteroidCollisionBottom(ast6);
         }
     }
 
@@ -223,7 +348,7 @@ function start() {
                 });
             }
 
-            // Collision logic
+            checkAsteroidCollisionBottom(ast7);
         }
     }
 
@@ -243,13 +368,13 @@ function start() {
                 });
             }
 
-            // Collision logic
+            checkAsteroidCollisionBottom(ast8);
         }
     }
 
     function checkFroggerLives() {
         //Check if enough lives
-        if (lives > 0) {
+        if (lives >= 0) {
             //Check for location of 'home'
             if (frogY === 10) {
                 //Insert win-function later. If you win, change values of title of GOScreen
@@ -257,13 +382,11 @@ function start() {
                 console.log('You win!');
             }
             else {
-                //Checks for location of black hole, how to do for cirlce?!
                 if (!checkBlackHoleCollision()) {
                     moveFrogger();
                 }
                 else {
                     console.log('Game over!');
-                    //Insert gameover-function. How to make this work?
                     clearInterval(intervalId);
                     //main().createGOScreen(); // goes back to splashScreen (because it is default?)
                 }
@@ -284,10 +407,16 @@ function start() {
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
         
         drawBlackHole();
+
         drawAsteroid8();
         drawAsteroid7();
         drawAsteroid6();
         drawAsteroid5();
+        drawAsteroid4();
+        drawAsteroid3();
+        drawAsteroid2();
+        drawAsteroid1();
+        
         
         checkFroggerLives();
         
