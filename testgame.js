@@ -27,6 +27,9 @@ function start() {
     let yellowPlanet = new Image();
     yellowPlanet.src = '/images/yellowPlanet.png';
 
+    let blackHole = new Image();
+    blackHole.src = '/images/blackHoletest.png';
+
     // Asteroids
     let astImg = new Image();
     astImg.src = '/images/astSmall.png';
@@ -39,16 +42,16 @@ function start() {
     let ast5 = [{x:-30, y: 360}];
     let ast6 = [{x:500, y: 410}];
     let ast7 = [{x:-30, y: 460}];
-    let ast8 = [{x:300, y: 510}];
+    let ast8 = [{x:500, y: 510}];
 
     // Variables imgs
     let frogX = 208;
     let frogY = 560;
     let frogWidth = 35;
     let halfWidth = canvas.width/2; 
-    let bHX = 225;
-    let bHY = 300;
-    let blackHoleR = 50;
+    let bHX = 225 - blackHole.width/2;
+    let bHY = 300 - blackHole.height/2;
+    
 
     //Variables score
     let lives = 3;
@@ -124,72 +127,59 @@ function start() {
                 
     })
 
-    //Draw black hole
-    function drawBlackHole(){
-        ctx.beginPath();
-        ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
-        let blackHole = new Image();
-        blackHole.src = '/images/New Piskel-1.png (32).png';
-        let blackHolepattern = ctx.createPattern(blackHole, "repeat");
-        ctx.fillStyle = blackHolepattern;
-        ctx.fill();
-        
-        ctx.stroke();
-        ctx.closePath();
-    }
-
 
     //Check black hole collision
     function checkBlackHoleCollision() {
         //Check closest edge and save in variable
-        let closestX = bHX;
-        let closestY = bHY;
+        // let closestX = bHX;
+        // let closestY = bHY;
 
-        if (bHX < frogX) {
-            closestX = frogX;
-        }
-        else if (bHX > frogX + frogWidth) {
-            closestX = frogX + frogWidth;
-        }
+        // if (bHX < frogX) {
+        //     closestX = frogX;
+        // }
+        // else if (bHX > frogX + frogWidth) {
+        //     closestX = frogX + frogWidth;
+        // }
 
-        if (bHY < frogY) {
-            closestY = frogY;
-        }
-        else if (bHY > frogY + frogWidth) {
-            closestY = frogY + frogWidth;
-        }
+        // if (bHY < frogY) {
+        //     closestY = frogY;
+        // }
+        // else if (bHY > frogY + frogWidth) {
+        //     closestY = frogY + frogWidth;
+        // }
 
-        //Check distance
-        let distX = bHX - closestX;
-        let distY = bHY - closestY;
-        let calcDistance = (distX*distX) + (distY*distY);
-        let distance = Math.sqrt(calcDistance);
+        // //Check distance
+        // let distX = bHX - closestX;
+        // let distY = bHY - closestY;
+        // let calcDistance = (distX*distX) + (distY*distY);
+        // let distance = Math.sqrt(calcDistance);
 
-        //If distance is smaller than radius, collision is true
-        if (distance <= blackHoleR) {
+        // //If distance is smaller than radius, collision is true
+        // if (distance <= blackHoleR) {
+        //     return true;
+        // }
+        // else {
+        //     return false;
+        // }
+        if ((frogX + frogWidth > bHX && frogX < bHX + blackHole.width) && (frogY < bHY + blackHole.width && frogY + frogWidth > bHY)) {
             return true;
         }
-        else {
-            return false;
-        }
+       
+
     }
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
-            frogX += 8;
-            frogger.src = '/images/froggerRight.png';
+            frogX += 2;
         }
         else if (isLeftArrow && frogX > 0) {
-            frogX -= 8;
-            frogger.src = '/images/froggerLeft.png';
+            frogX -= 2;
         }
         else if (isUpArrow && frogY > 10) {
-            frogY -= 10;
-            frogger.src = '/images/frogger.png';
+            frogY -= 2;
         }
         else if (isDownArrow && frogY + frogWidth < canvas.height) {
-            frogY += 10;
-            frogger.src = '/images/froggerDown.png';
+            frogY += 2;
         }
     }
 
@@ -406,7 +396,7 @@ function start() {
     }
 
     function checkFroggerWin() {
-        if (frogY < 15 && frogX > 100 & frogX < 500) {
+        if (frogY === 10) {
             score += 500;
             clearInterval(intervalId);
             clearInterval(intervalIdTwo);
@@ -440,8 +430,7 @@ function start() {
         ctx.drawImage(bluePlanet, 40, 300 - 40, 80, 80);
         ctx.drawImage(yellowPlanet, 330, 300 - 40, 80, 80);
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
-        
-        drawBlackHole();
+        ctx.drawImage(blackHole, 225 - blackHole.width/2, 300 - blackHole.height/2, 100, 100);
 
         drawAsteroid8();
         drawAsteroid7();
@@ -460,8 +449,7 @@ function start() {
         requestAnimationFrame(drawCanvas);   
     }, 20)
 
-    //Showing score from start
-    function showScore() {
+    intervalIdTwo = setInterval(() => {
         document.querySelector('.score-num').innerText = `Score: ${score}`;
         score -= 10;
         console.log(Math.floor(score));
@@ -470,11 +458,6 @@ function start() {
             removeGameScreen();
             createGOScreen();
         }
-    };
-    
-    showScore();
-    intervalIdTwo = setInterval(() => {
-        showScore();
     }, 1000)
     
     //Play music after 3 seconds 
@@ -485,5 +468,5 @@ function start() {
     
 }
 
-//window.addEventListener("load", start)
+window.addEventListener("load", start)
 
