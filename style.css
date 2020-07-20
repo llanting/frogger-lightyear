@@ -40,6 +40,8 @@ body {
   font-size: 40px;
   margin-top: 50px;
   margin-bottom: 20px;
+  color: #27c208;
+  text-shadow: -5px 2px 2px #db00b3;
 }
 
 .keyHead {
@@ -134,4 +136,10 @@ body {
 
 .mention {
   font-size: 10px;
+}
+
+.win-lose-text {
+  font-size: 40px;
+  color: #27c208;
+  text-shadow: -5px 2px 2px #db00b3;
 }

@@ -12,6 +12,8 @@ let splashScreen;
 let gameScreen;
 let gameOverScreen;
 let winScreen;
+let name;
+let input;
 
 //Splash
 function createSplashScreen() {
@@ -28,6 +30,7 @@ function createSplashScreen() {
                         <li>Arrow Left = Left</li>
                         <li>Arrow Right = Right</li>
                     </ul>
+                    <input type="text" name="name" placeholder="Enter your name" class="input-name">
                 </div>
                 <div class="mainSplash">
                     <button id="start-btn" class ="button btn btn-danger">START</button>
@@ -48,7 +51,6 @@ function createSplashScreen() {
         createGameScreen();
         start();
     });
-
 }
 
 function removeSplashScreen() {
