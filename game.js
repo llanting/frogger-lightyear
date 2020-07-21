@@ -63,7 +63,6 @@ function start() {
     let highscore = 0;
     highscore = window.localStorage.getItem("highscore");
 
-
     function getHighScore() {
         if (score > highscore) {
             window.localStorage.setItem('highscore', JSON.stringify(score));
@@ -78,9 +77,11 @@ function start() {
 
     // Music
     let bgMusic = new Audio('/music/backgroundmusic.mp3');
+    bgMusic.loop = true;
     let hopMusic = new Audio('/music/hop.wav');
     let squashMusic = new Audio('/music/sound-frogger-squash.wav');
     let chew = new Audio('/music/eat.wav');
+    
 
     function playHop() {
         hopMusic.volume = 0.1;
@@ -89,39 +90,39 @@ function start() {
 
     // Press arrowkey eventListener
     document.addEventListener('keydown', (event) => {
-        console.log('Key pressed', event);
-            if (event.key === 'ArrowRight') {
-                isRightArrow = true;
-                isLeftArrow = false;
-                isUpArrow = false;
-                isDownArrow = false;
-                playHop();
-            }
-            else if (event.key === 'ArrowLeft') {
-                isLeftArrow = true;
-                isRightArrow = false;
-                isUpArrow = false;
-                isDownArrow = false;
-                playHop();
-            }
-            else if (event.key === 'ArrowUp') {
-                isUpArrow = true;
-                isLeftArrow = false;
-                isRightArrow = false;
-                isDownArrow = false;
-                playHop();
-            }
-            else if (event.key === 'ArrowDown') {
-                isUpArrow = false;
-                isLeftArrow = false;
-                isRightArrow = false;
-                isDownArrow = true;
-                playHop();
-            }
+        if (event.key === 'ArrowRight') {
+            isRightArrow = true;
+            isLeftArrow = false;
+            isUpArrow = false;
+            isDownArrow = false;
+            playHop();
+        }
+        else if (event.key === 'ArrowLeft') {
+            isLeftArrow = true;
+            isRightArrow = false;
+            isUpArrow = false;
+            isDownArrow = false;
+            playHop();
+        }
+        else if (event.key === 'ArrowUp') {
+            isUpArrow = true;
+            isLeftArrow = false;
+            isRightArrow = false;
+            isDownArrow = false;
+            playHop();
+        }
+        else if (event.key === 'ArrowDown') {
+            isUpArrow = false;
+            isLeftArrow = false;
+            isRightArrow = false;
+            isDownArrow = true;
+            playHop();
+        }
     })
             
     // Release arrowkey eventListener
     document.addEventListener('keyup', (event) => {
+
         isUpArrow = false;
         isLeftArrow = false;
         isRightArrow = false;
@@ -440,19 +441,22 @@ function start() {
     function gameOver() {
         clearInterval(intervalId);
         clearInterval(intervalIdTwo);
+        bgMusic.pause();
         squashMusic.volume = 0.1;
         squashMusic.play();
         removeGameScreen();
         createGOScreen();
         document.querySelector('.end-score').innerText = `Your score: ${score}`;
         getHighScore();
-        console.log(`${localStorage.getItem('name')}`)
-        document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+        document.querySelector('.highscore').innerText = `Highscore: ${window.localStorage.getItem("highscore")}`;
     }
 
     function gameWin() {
         score += lives * 100;
         score += 500;
+        bgMusic.pause();
+        winSound.volume = 0.1;
+        winSound.play();
         clearInterval(intervalId);
         clearInterval(intervalIdTwo);
         removeGameScreen();
@@ -486,7 +490,7 @@ function start() {
             }
         }
     }
-
+    
     function drawCanvas() {
         ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
         ctx.drawImage(baseImg, halfWidth - 100, 550, 200, 100);
@@ -532,11 +536,11 @@ function start() {
         showScore();
     }, 1000)
     
-    // //Play music after 3 seconds 
-    // setTimeout(() => {
-    //     bgMusic.volume = 0.1;
-    //     bgMusic.play();
-    // }, 3000);
+    //Play music after 2 seconds 
+    setTimeout(() => {
+        bgMusic.volume = 0.1;
+        bgMusic.play();
+    }, 2000);
 
 }
 

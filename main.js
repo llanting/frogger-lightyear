@@ -14,6 +14,7 @@ let gameOverScreen;
 let winScreen;
 let name;
 let input;
+let winSound = new Audio('/music/snd_music_victorytheme.ogg');
 
 //Splash
 function createSplashScreen() {
@@ -30,7 +31,6 @@ function createSplashScreen() {
                         <li>Arrow Left = Left</li>
                         <li>Arrow Right = Right</li>
                     </ul>
-                    <input type="text" name="name" placeholder="Enter your name" class="input-name">
                 </div>
                 <div class="mainSplash">
                     <button id="start-btn" class ="button btn btn-danger">START</button>
@@ -135,6 +135,7 @@ function createWinScreen() {
     let winRestartBtn = winScreen.querySelector('#restart-btn');
 
     winRestartBtn.addEventListener('click', function() {
+        winSound.pause();
         removeWinScreen();
         createSplashScreen();
     });      
@@ -143,6 +144,8 @@ function createWinScreen() {
 function removeWinScreen() {
     winScreen.remove();
 }
+
+
 
 
 
