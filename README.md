@@ -141,9 +141,9 @@ Definition of the different states and their transition (transition functions)
 
 ### Git
 URls for the project repo and deploy:
-- Link Repo(https://github.com/llanting/frogger-lightyear)
+- [Link Repo](https://github.com/llanting/frogger-lightyear)
 - [Link Deploy]()
 
 ### Slides
-URls for the project presentation (https://docs.google.com/presentation/d/1kaBg_BLZZyEgQ7DL6YJcAUsF5Lvkmq2P-YilwCVFr0g/edit?usp=sharing)
+[URls for the project presentation](https://docs.google.com/presentation/d/1kaBg_BLZZyEgQ7DL6YJcAUsF5Lvkmq2P-YilwCVFr0g/edit?usp=sharing)
 
