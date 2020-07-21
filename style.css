@@ -1,8 +1,3 @@
-html,
-body {
-  height: 100%;
-}
-
 body {
   background-color: rgb(1, 0, 32); 
   color: white;
@@ -16,15 +11,28 @@ body {
 .jumbotron {
   background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
   background-size: 100% auto;
-  background-repeat: repeat-y;
+  background-repeat:repeat space;
+  margin-top: 0px;
+  padding-top: 0px;
   margin-bottom: 0px;
   height: 100%;
+}
+
+.music {
+  background-color: transparent;
+  border: none;
+  width: 5px;
+  height: 5px;
+  display: flex;
+  align-self: right;
+  margin-top: 0px;
+  padding-top: 50px;
 }
 
 .splashScreen {
   background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
   background-size: 100% auto;
-  background-repeat: repeat-y;
+  background-repeat: repeat space;
   height: 100%;
 }
 
@@ -32,16 +40,17 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  margin: 0px;
+  
 }
 
 .display-4 {
   font-size: 40px;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 0px;
   color: #27c208;
   text-shadow: -5px 2px 2px #db00b3;
+  padding-bottom: 0px;
 }
 
 .keyHead {
@@ -64,6 +73,8 @@ body {
 
 #start-btn {
   margin: 50px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
   border-radius: 50%;
   height: 300px;
   width: 300px;
@@ -75,17 +86,12 @@ body {
   height: 20%;
   border: 5px solid #dc3545;
   margin: 30px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
-.frogLet {
-  width: 30px;
-  height: 30px;
-  margin: 0px;
-  padding: 0px;
-}
 
 /* Game */
-
 .gamescreen {
   height: 100%;
 }
@@ -110,6 +116,10 @@ body {
 
 
 /* GameOver */
+.win-lose-text{
+  padding-top: 50px;
+}
+
 .background-gameover {
   background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
   background-size: 100% auto;
@@ -118,11 +128,11 @@ body {
 }
 
 .subtitle {
-  margin-top:30px;
+  margin-top:10px;
 }
 
 #restart-btn {
-  margin: 50px;
+  margin-top: 20px;
   border-radius: 50%;
   height: 300px;
   width: 300px;
@@ -130,12 +140,13 @@ body {
 }
 
 .honor {
-  margin-top: 50px;
+  margin-top: 30px;
   font-size: 14px;
 }
 
 .mention {
   font-size: 10px;
+  padding-bottom: 0px;
 }
 
 .win-lose-text {

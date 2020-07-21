@@ -221,7 +221,7 @@ function start() {
     function checkAlienCollision(alienArr) {
         for (let i=0; i < alienArr.length; i++) {
             if ((frogX + frogWidth > alienArr[i].x && frogX < alienArr[i].x + 30) && (frogY < alienArr[i].y + 30 && frogY + frogWidth > alienArr[i].y)) {
-                score += 100;
+                score += 200;
                 alienArr.splice(i, 1);
                 chew.volume = 0.1;
                 chew.play();
@@ -431,6 +431,15 @@ function start() {
         else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = '/images/frogger.png';
             frogY -= 5;
+
+            // switch(frogY) {
+            //     case 560:
+            //         frogY = 510;
+            //         break;
+            //     case 510:
+            //         frogY = 460;
+            //         break;
+            // }
         }
         else if (isDownArrow && frogY + frogWidth < canvas.height) {
             frogY += 5;
@@ -545,4 +554,3 @@ function start() {
 }
 
 //window.addEventListener("load", start)
-

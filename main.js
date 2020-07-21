@@ -1,4 +1,4 @@
-function buildPage(html) {
+ function buildPage(html) {
     let div = document.createElement('div');
 
     div.innerHTML = html;
@@ -14,6 +14,7 @@ let gameOverScreen;
 let winScreen;
 let name;
 let input;
+let splashMusic = new Audio('/music/splashMusic.mp3')
 let winSound = new Audio('/music/snd_music_victorytheme.ogg');
 
 //Splash
@@ -21,30 +22,50 @@ function createSplashScreen() {
     splashScreen = buildPage(`
         <main class="splashScreen">
             <div class="title jumbotron">
+                <button class="music"><img src="/images/musicBtn.png"></button>
                 <h1 class="display-4">Frogger Lightyear</h1>
-                <p class="lead">Frogger has been on an amazing space-adventure. Reach the top and help him get home safe. But watch out for asteroids and that black hole...</p>
+                <p class="lead">Frogger has been on an amazing space-adventure. Help him get home safe by eating your way through aliens and visiting planets. But watch out for asteroids and that black hole...</p>
+                
                 <div>
                     <h3 class="keyHead">Keys</h3>
                     <ul class='keys'>
-                        <li>Arrow Up = Up</li>
-                        <li>Arrow Down = Down</li>
-                        <li>Arrow Left = Left</li>
-                        <li>Arrow Right = Right</li>
+                        <li>Arrow Up: Up</li>
+                        <li>Arrow Down: Down</li>
+                        <li>Arrow Left: Left</li>
+                        <li>Arrow Right: Right</li>
                     </ul>
                 </div>
                 <div class="mainSplash">
                     <button id="start-btn" class ="button btn btn-danger">START</button>
                     <img class="frogLY" src="/images/froggerLY.jpeg" alt='Frogger Lightyear'>
+                </div>
             </div>
         </main>`);
 
     bodyIndex.prepend(splashScreen);
+
+    splashMusic.volume = 0.1;
+    let splashOn = true;
+    splashMusic.play();
+
+    let musicBtn = splashScreen.querySelector('.music');
+
+    musicBtn.addEventListener('click', function() {
+        if (splashOn) {
+            splashMusic.pause();
+            splashOn = false;
+        } else {
+            splashOn = true;
+            splashMusic.play();
+        }
+    })
 
     let startBtn = splashScreen.querySelector('#start-btn');
 
     let startMusic = new Audio('/music/coinin.wav');
 
     startBtn.addEventListener('click', function() {
+        splashMusic.pause();
         startMusic.volume = 0.1;
         startMusic.play();
         removeSplashScreen();
@@ -144,9 +165,3 @@ function createWinScreen() {
 function removeWinScreen() {
     winScreen.remove();
 }
-
-
-
-
-
-
