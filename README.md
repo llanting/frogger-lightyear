@@ -7,11 +7,11 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 
 ## MVP (DOM - CANVAS)
 
-- +Game has a frogger that moves vertically, upwards, when using arrowkeys
+- Game has a frogger that moves vertically, upwards, when using arrowkeys
 - Asteroids move horizontally from left to right on one line, and right to left on another line
 - Multiple asteroids on one line
 - Lines have differents speeds
-- +Two fixed position planets where the frogger is safe
+- Two fixed position planets where the frogger is safe
 - One Black Hole in between the planets that will 'game over' the player when it is hit
 - Planet at the top that will end the game when reached
 - Start with an amount of points that will decrease every second
@@ -23,9 +23,7 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 - Add scoreboard
 - Name input
 - Add aliens to eat for points
-- Pick up other froggers for points (on safe planets)
-- Ability to shoot asteroids
-- Black Hole Gravity, when you move too close, you will be pulled in
+- Pick up other froggers for lives (on safe planets)
 
 ## Data Structure
 
@@ -34,19 +32,19 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 <!-- button (with high border radius for circle) and name (changing from frogs to letters) -->
 - createSplashScreen () {}
 
-- +createGameScreen () {}
+- createGameScreen () {}
 
 <!-- game over/you win (same tactic as chronometer change), score and restart button -->
 - createGameOverScreen () {}
 
-- +startGame() {}
+- startGame() {}
 
 # game.js
 
 <!-- creating all variables -->
  - gameVars() {}
 
- - +drawCanvas() {}
+ - drawCanvas() {}
 
 <!-- Drawing three fixed position planets -->
  - planet() { x, y, direction, size }
@@ -143,9 +141,9 @@ Definition of the different states and their transition (transition functions)
 
 ### Git
 URls for the project repo and deploy:
-- Link Repo](https://github.com/llanting/frogger-lightyear)
+- Link Repo(https://github.com/llanting/frogger-lightyear)
 - [Link Deploy]()
 
 ### Slides
-URls for the project presentation
+URls for the project presentation (https://docs.google.com/presentation/d/1kaBg_BLZZyEgQ7DL6YJcAUsF5Lvkmq2P-YilwCVFr0g/edit?usp=sharing)
 
