@@ -416,30 +416,30 @@ function start() {
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
-            frogX += 8;
+            frogX += 2;
             frogger.src = './images/froggerRight.png';
         } else if (isLeftArrow && frogX > 0) {
-            frogX -= 8;
+            frogX -= 2;
             frogger.src = './images/froggerLeft.png';
         } else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = './images/frogger.png';
-
+            frogY += 2;
             //Tried using if and switch, didn't work
-            if (frogY = row1) {
-                frogY = row0;
-            } else if (frogY =row2) {
-                frogY = row1;
-            } else if (frogY =row3) {
-                frogY = row4;
-            } else if (frogY =row4) {
-                frogY = row5;
-            } else if (frogY =row5) {
-                frogY = row6;
-            } else if (frogY =row6) {
-                frogY = row7;
-            }
+            // if (frogY = row1) {
+            //     frogY = row0;
+            // } else if (frogY =row2) {
+            //     frogY = row1;
+            // } else if (frogY =row3) {
+            //     frogY = row4;
+            // } else if (frogY =row4) {
+            //     frogY = row5;
+            // } else if (frogY =row5) {
+            //     frogY = row6;
+            // } else if (frogY =row6) {
+            //     frogY = row7;
+            // }
         } else if (isDownArrow && frogY + frogWidth < 560) {
-            frogY += 11.5;
+            frogY += 2;
             frogger.src = './images/froggerDown.png';
         }
     }

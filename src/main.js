@@ -24,7 +24,7 @@ function createSplashScreen() {
     splashScreen = buildPage(`
         <main class="splashScreen">
             <div class="title jumbotron">
-                <button class="music"><img src="/Users/lanette/Programming/Projects/frogger-lightyear/images/musicBtn.png"></button>
+                <button class="music"><img src="/images/musicBtn.png"></button>
                 <h1 class="display-4">Frogger Lightyear</h1>
                 <p class="lead">Frogger has been on an amazing space-adventure. Help him get home safe by eating your way through aliens and visiting planets. But watch out for asteroids and that black hole...</p>
                 <div>
