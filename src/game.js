@@ -438,11 +438,11 @@ function start() {
 
         localStorage.setItem('highscore', JSON.stringify(highscores));
         
-        
-        //Change here for innerText li
-        for (let i = 0; i < 5; i++) {
-            document.querySelector('.highscores').innerHTML += `<li>` + highscores[i].score + '</li>';
-        };
+        document.querySelector('.scoreLi1').innerText = `${highscores[0].score}`;
+        document.querySelector('.scoreLi2').innerText = `${highscores[1].score}`;
+        document.querySelector('.scoreLi3').innerText = `${highscores[2].score}`;
+        document.querySelector('.scoreLi4').innerText = `${highscores[3].score}`;
+        document.querySelector('.scoreLi5').innerText = `${highscores[4].score}`;
     }
 
     function gameOver() {
