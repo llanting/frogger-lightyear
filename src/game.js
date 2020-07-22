@@ -423,7 +423,7 @@ function start() {
             frogger.src = './images/froggerLeft.png';
         } else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = './images/frogger.png';
-            frogY += 2;
+            frogY -= 2;
             //Tried using if and switch, didn't work
             // if (frogY = row1) {
             //     frogY = row0;
