@@ -60,14 +60,7 @@ function start() {
     //Variables score and lives
     let lives = 3;
     let score = 3000;
-    let highscore = 0;
-    highscore = window.localStorage.getItem("highscore");
-
-    function getHighScore() {
-        if (score > highscore) {
-            window.localStorage.setItem('highscore', JSON.stringify(score));
-        }
-    }
+    let highscores;
 
     //Variables keys
     let isRightArrow = false;
@@ -76,8 +69,6 @@ function start() {
     let isDownArrow = false;
 
     // Music
-    let bgMusic = new Audio('/music/backgroundmusic.mp3');
-    bgMusic.loop = true;
     let hopMusic = new Audio('/music/hop.wav');
     let squashMusic = new Audio('/music/sound-frogger-squash.wav');
     let chew = new Audio('/music/eat.wav');
@@ -421,49 +412,53 @@ function start() {
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
-            frogX += 5;
+            frogX += 8;
             frogger.src = '/images/froggerRight.png';
         }
         else if (isLeftArrow && frogX > 0) {
-            frogX -= 5;
+            frogX -= 8;
             frogger.src = '/images/froggerLeft.png';
         }
         else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = '/images/frogger.png';
-            frogY -= 5;
-
-            // switch(frogY) {
-            //     case 560:
-            //         frogY = 510;
-            //         break;
-            //     case 510:
-            //         frogY = 460;
-            //         break;
-            // }
+            frogY -= 8;
         }
-        else if (isDownArrow && frogY + frogWidth < canvas.height) {
-            frogY += 5;
+        else if (isDownArrow && frogY + frogWidth < 560) {
+            frogY += 8;
             frogger.src = '/images/froggerDown.png';
         }
+    }
+  
+    function getHighScore(gameScore) {
+        let result = {score: gameScore};
+        let savedScores = localStorage.getItem('highscore') || '[]';
+        highscores = [...JSON.parse(savedScores), result];
+        highscores.sort((a,b) => b.score- a.score);
+        highscores.slice(0, 5);
+
+        localStorage.setItem('highscore', JSON.stringify(highscores));
+        
+        
+        //Change here for innerText li
+        for (let i = 0; i < 5; i++) {
+            document.querySelector('.highscores').innerHTML += `<li>` + highscores[i].score + '</li>';
+        };
     }
 
     function gameOver() {
         clearInterval(intervalId);
         clearInterval(intervalIdTwo);
-        bgMusic.pause();
         squashMusic.volume = 0.1;
         squashMusic.play();
         removeGameScreen();
-        createGOScreen();
+        createGOScreen(score);
         document.querySelector('.end-score').innerText = `Your score: ${score}`;
-        getHighScore();
-        document.querySelector('.highscore').innerText = `Highscore: ${window.localStorage.getItem("highscore")}`;
+        getHighScore(score);
     }
 
     function gameWin() {
         score += lives * 100;
         score += 500;
-        bgMusic.pause();
         winSound.volume = 0.1;
         winSound.play();
         clearInterval(intervalId);
@@ -471,8 +466,7 @@ function start() {
         removeGameScreen();
         createWinScreen();
         document.querySelector('.end-score').innerText = `Your score: ${score}`;
-        getHighScore();
-        document.querySelector('.highscore').innerText = `Highscore: ${localStorage.getItem('highscore')}`;
+        getHighScore(score);
     }
 
     function checkNumberLives() {
@@ -534,7 +528,6 @@ function start() {
     function showScore() {
         document.querySelector('.score-num').innerText = `Score: ${score}`;
         score -= 10;
-        console.log(Math.floor(score));
         if (score < 0) {
             gameOver();
         }

@@ -11,7 +11,7 @@ body {
 .jumbotron {
   background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
   background-size: 100% auto;
-  background-repeat:repeat space;
+  background-repeat:repeat;
   margin-top: 0px;
   padding-top: 0px;
   margin-bottom: 0px;
@@ -32,7 +32,7 @@ body {
 .splashScreen {
   background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
   background-size: 100% auto;
-  background-repeat: repeat space;
+  background-repeat: repeat;
   height: 100%;
 }
 
@@ -153,4 +153,14 @@ body {
   font-size: 40px;
   color: #27c208;
   text-shadow: -5px 2px 2px #db00b3;
+}
+
+.highscores {
+  list-style-position: inside;
+  padding-left: 0px;
+}
+
+.score-title {
+  padding-top: 15px;
+  font-size: 20px;
 }

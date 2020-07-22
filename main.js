@@ -16,6 +16,8 @@ let name;
 let input;
 let splashMusic = new Audio('/music/splashMusic.mp3')
 let winSound = new Audio('/music/snd_music_victorytheme.ogg');
+let bgMusic = new Audio('/music/backgroundmusic.mp3');
+bgMusic.loop = true;
 
 //Splash
 function createSplashScreen() {
@@ -104,18 +106,21 @@ function createGameScreen() {
 
 function removeGameScreen() {
     gameScreen.remove();
-    
+    bgMusic.pause();
 }
 
 //Game over
-function createGOScreen() {
+function createGOScreen(score) {
     gameOverScreen = buildPage(`
     <main class="background-gameover">
         <div class="jumbotron">
             <h3 class="win-lose-text">GAME OVER!</h3>
             <p class="lead">Frogger Lightyear floats in space for ever...</p>
-            <p class="end-score"></p>
-            <p class='highscore'></p>
+            <p class="end-score">Your score: ${score}</p>
+            <div class="scoreboard">
+                <h2 class="score-title">High Scores:</h2>
+                <ol class='highscores'></ol>
+            </div>
             <button id="restart-btn" class ="button btn btn-danger">PLAY AGAIN?</button>
             <p class="honor">In honor of Frogger</p>
             <p class="mention">Lanette &copy 2020</p>
@@ -144,7 +149,10 @@ function createWinScreen() {
             <h3 class="win-lose-text">YOU WIN!</h3>
             <p class="lead">Frogger Lightyear is reunited with his family!</p>
             <p class="end-score"></p>
-            <p class='highscore'></p>
+            <div class="scoreboard">
+                <h2 class="score-title">High Scores:</h2>   
+                <ol class='highscores'></ol>
+            </div>
             <button id="restart-btn" class ="button btn btn-danger">PLAY AGAIN?</button>
             <p class="honor">In honor of Frogger</p>
             <p class="mention">Lanette &copy 2020</p>
