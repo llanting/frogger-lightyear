@@ -88,22 +88,19 @@ function start() {
             isUpArrow = false;
             isDownArrow = false;
             playHop();
-        }
-        else if (event.key === 'ArrowLeft') {
+        } else if (event.key === 'ArrowLeft') {
             isLeftArrow = true;
             isRightArrow = false;
             isUpArrow = false;
             isDownArrow = false;
             playHop();
-        }
-        else if (event.key === 'ArrowUp') {
+        } else if (event.key === 'ArrowUp') {
             isUpArrow = true;
             isLeftArrow = false;
             isRightArrow = false;
             isDownArrow = false;
             playHop();
-        }
-        else if (event.key === 'ArrowDown') {
+        } else if (event.key === 'ArrowDown') {
             isUpArrow = false;
             isLeftArrow = false;
             isRightArrow = false;
@@ -114,7 +111,6 @@ function start() {
             
     // Release arrowkey eventListener
     document.addEventListener('keyup', (event) => {
-
         isUpArrow = false;
         isLeftArrow = false;
         isRightArrow = false;
@@ -144,15 +140,13 @@ function start() {
 
         if (bHX < frogX) {
             closestX = frogX;
-        }
-        else if (bHX > frogX + frogWidth) {
+        } else if (bHX > frogX + frogWidth) {
             closestX = frogX + frogWidth;
         }
 
         if (bHY < frogY) {
             closestY = frogY;
-        }
-        else if (bHY > frogY + frogWidth) {
+        } else if (bHY > frogY + frogWidth) {
             closestY = frogY + frogWidth;
         }
 
@@ -165,8 +159,7 @@ function start() {
         //If distance is smaller than radius, collision is true
         if (distance <= blackHoleR) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -230,8 +223,7 @@ function start() {
                 if (frogX < canvas.width/2) {
                     frogX = 65;
                     frogY = canvas.height /2 - frogWidth;
-                }
-                else {
+                } else {
                     frogX = 350;
                     frogY = canvas.height /2 - frogWidth;
                 }
@@ -415,29 +407,38 @@ function start() {
     let row8 = 510
     let row7= 460;
     let row6 = 410;
+    let row5 = 360;
+    let row4 = 210;
+    let row3 = 160;
+    let row2 = 120;
+    let row1 = 70;
+    let row0 = 10;
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
             frogX += 8;
             frogger.src = '/images/froggerRight.png';
-        }
-        else if (isLeftArrow && frogX > 0) {
+        } else if (isLeftArrow && frogX > 0) {
             frogX -= 8;
             frogger.src = '/images/froggerLeft.png';
-        }
-        else if (isUpArrow && frogY + frogWidth > 0) {
+        } else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = '/images/frogger.png';
 
             //Tried using if and switch, didn't work
-            if (frogY = row8) {
-                frogY = row7;
-            } else if (frogY =row9) {
-                frogY = row8;
-            } else if (frogY =row7) {
+            if (frogY = row1) {
+                frogY = row0;
+            } else if (frogY =row2) {
+                frogY = row1;
+            } else if (frogY =row3) {
+                frogY = row4;
+            } else if (frogY =row4) {
+                frogY = row5;
+            } else if (frogY =row5) {
                 frogY = row6;
+            } else if (frogY =row6) {
+                frogY = row7;
             }
-        }
-        else if (isDownArrow && frogY + frogWidth < 560) {
+        } else if (isDownArrow && frogY + frogWidth < 560) {
             frogY += 11.5;
             frogger.src = '/images/froggerDown.png';
         }
@@ -486,8 +487,7 @@ function start() {
     function checkNumberLives() {
         if (lives < 0) {
             gameOver();
-        }
-        else {
+        } else {
             lives -= 1;
             let score = document.querySelector('.lives');
             score.parentNode.removeChild(score);  
@@ -497,12 +497,10 @@ function start() {
     function checkFroggerWin() {
         if (frogY < 15 && frogX > 100 & frogX < 500) {
             gameWin();
-        }
-        else {
+        } else {
             if (!checkBlackHoleCollision()) {
                 moveFrogger();
-            }
-            else {
+            } else {
                 gameOver();
             }
         }
