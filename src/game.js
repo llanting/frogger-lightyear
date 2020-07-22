@@ -10,26 +10,26 @@ function start() {
 
     // Load images
     let bgImg = new Image();
-    bgImg.src = '/images/kai-pilger-Ef6iL87-vOA-unsplash.jpg'
+    bgImg.src = './images/kai-pilger-Ef6iL87-vOA-unsplash.jpg'
 
     let baseImg = new Image();
-    baseImg.src = '/images/startBase.png';
+    baseImg.src = './images/startBase.png';
 
     let homeImg = new Image();
-    homeImg.src = '/images/home.png';
+    homeImg.src = './images/home.png';
 
     let frogger = new Image();
-    frogger.src = '/images/frogger.png';
+    frogger.src = './images/frogger.png';
 
     let bluePlanet = new Image();
-    bluePlanet.src = '/images/bluePlanet.png';
+    bluePlanet.src = './images/bluePlanet.png';
 
     let yellowPlanet = new Image();
-    yellowPlanet.src = '/images/yellowPlanet.png';
+    yellowPlanet.src = './images/yellowPlanet.png';
 
     // Asteroids
     let astImg = new Image();
-    astImg.src = '/images/astSmall.png';
+    astImg.src = './images/astSmall.png';
 
     // Asteroids rows
     let ast1 = [{x:-30, y: 70}];
@@ -43,7 +43,7 @@ function start() {
 
     //Aliens
     let alienImg = new Image();
-    alienImg.src = '/images/alien.png';
+    alienImg.src = './images/alien.png';
 
     let alien2 = [{x:400, y: 110}]
     let alien7 = [{x:-130, y: 460}];
@@ -70,9 +70,9 @@ function start() {
     let isDownArrow = false;
 
     // Music
-    let hopMusic = new Audio('/music/hop.wav');
-    let squashMusic = new Audio('/music/sound-frogger-squash.wav');
-    let chew = new Audio('/music/eat.wav');
+    let hopMusic = new Audio('./music/hop.wav');
+    let squashMusic = new Audio('./music/sound-frogger-squash.wav');
+    let chew = new Audio('./music/eat.wav');
     
 
     function playHop() {
@@ -123,7 +123,7 @@ function start() {
         ctx.beginPath();
         ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
         let blackHole = new Image();
-        blackHole.src = '/images/blackHoleDef.png';
+        blackHole.src = './images/blackHoleDef.png';
         let blackHolepattern = ctx.createPattern(blackHole, "repeat");
         ctx.fillStyle = blackHolepattern;
         ctx.fill();
@@ -417,12 +417,12 @@ function start() {
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
             frogX += 8;
-            frogger.src = '/images/froggerRight.png';
+            frogger.src = './images/froggerRight.png';
         } else if (isLeftArrow && frogX > 0) {
             frogX -= 8;
-            frogger.src = '/images/froggerLeft.png';
+            frogger.src = './images/froggerLeft.png';
         } else if (isUpArrow && frogY + frogWidth > 0) {
-            frogger.src = '/images/frogger.png';
+            frogger.src = './images/frogger.png';
 
             //Tried using if and switch, didn't work
             if (frogY = row1) {
@@ -440,7 +440,7 @@ function start() {
             }
         } else if (isDownArrow && frogY + frogWidth < 560) {
             frogY += 11.5;
-            frogger.src = '/images/froggerDown.png';
+            frogger.src = './images/froggerDown.png';
         }
     }
     

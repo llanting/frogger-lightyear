@@ -13,9 +13,9 @@ let gameScreen;
 let gameOverScreen;
 let winScreen;
 let playerName;
-let splashMusic = new Audio('/music/splashMusic.mp3')
-let winSound = new Audio('/music/snd_music_victorytheme.ogg');
-let bgMusic = new Audio('/music/backgroundmusic.mp3');
+let splashMusic = new Audio('./music/splashMusic.mp3')
+let winSound = new Audio('./music/snd_music_victorytheme.ogg');
+let bgMusic = new Audio('./music/backgroundmusic.mp3');
 bgMusic.loop = true;
 
 //Splash
@@ -24,7 +24,7 @@ function createSplashScreen() {
     splashScreen = buildPage(`
         <main class="splashScreen">
             <div class="title jumbotron">
-                <button class="music"><img src="/images/musicBtn.png"></button>
+                <button class="music"><img src="./images/musicBtn.png"></button>
                 <h1 class="display-4">Frogger Lightyear</h1>
                 <p class="lead">Frogger has been on an amazing space-adventure. Help him get home safe by eating your way through aliens and visiting planets. But watch out for asteroids and that black hole...</p>
                 <div>
@@ -39,7 +39,7 @@ function createSplashScreen() {
                 <input type='text' placeholder="What is your name?">
                 <div class="mainSplash">
                     <button id="start-btn" class ="button btn btn-danger">START</button>
-                    <img class="frogLY" src="/images/froggerLY.jpeg" alt='Frogger Lightyear'>
+                    <img class="frogLY" src="./images/froggerLY.jpeg" alt='Frogger Lightyear'>
                 </div>
             </div>
         </main>`);
@@ -72,7 +72,7 @@ function createSplashScreen() {
 
     let startBtn = splashScreen.querySelector('#start-btn');
 
-    let startMusic = new Audio('/music/coinin.wav');
+    let startMusic = new Audio('./music/coinin.wav');
 
     startBtn.addEventListener('click', function() {
         getPlayerName();
@@ -99,9 +99,9 @@ function createGameScreen() {
             <div class='score-lives'>
                 <span class='score score-num'>Score:</span>
                 <span class='score'>Lives:</span>
-                <img src="/images/frogger.png" alt='life' class="lives life">
-                <img src="/images/frogger.png" alt='life' class="lives life">
-                <img src="/images/frogger.png" alt='life' class="lives life">
+                <img src="./images/frogger.png" alt='life' class="lives life">
+                <img src="./images/frogger.png" alt='life' class="lives life">
+                <img src="./images/frogger.png" alt='life' class="lives life">
             </div> 
             <div class="canvas-container">
                 <canvas id='game-canvas' width="450" height="600"></canvas>
