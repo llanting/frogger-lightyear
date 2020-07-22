@@ -56,7 +56,10 @@ function createSplashScreen() {
     bodyIndex.prepend(splashScreen);
 
     let newChar;
-    setInterval(() => {
+    let titleInterval;
+    titleInterval = setInterval(() => {
+        let i = 0;
+        i++;
         changeTitle(0);
         document.querySelector('.one').innerHTML = newChar;
         setTimeout(() => {
@@ -83,15 +86,17 @@ function createSplashScreen() {
             changeTitle(6)
             document.querySelector('.seven').innerHTML = newChar;
         }, 3000);
+        if (i == 1) {
+            clearInterval(titleInterval);
+        }
     }, 700)
 
     function changeTitle(index){
         let titleStr = document.querySelector('.display-4').innerText;
         let titleArr = titleStr.split(' ');
-        console.log(titleArr)
-        
         titleArr[index] = `<img src="./images/rsz_1frogger.png">`;
         newChar = titleArr[index].toString();
+        console.log(titleArr)
     }
 
     function getPlayerName() {
