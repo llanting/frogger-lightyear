@@ -411,6 +411,11 @@ function start() {
         }
     }
 
+    let row9 = 560
+    let row8 = 510
+    let row7= 460;
+    let row6 = 410;
+
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
             frogX += 8;
@@ -422,10 +427,18 @@ function start() {
         }
         else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = '/images/frogger.png';
-            frogY -= 8;
+
+            //Tried using if and switch, didn't work
+            if (frogY = row8) {
+                frogY = row7;
+            } else if (frogY =row9) {
+                frogY = row8;
+            } else if (frogY =row7) {
+                frogY = row6;
+            }
         }
         else if (isDownArrow && frogY + frogWidth < 560) {
-            frogY += 8;
+            frogY += 11.5;
             frogger.src = '/images/froggerDown.png';
         }
     }
@@ -458,8 +471,8 @@ function start() {
     }
 
     function gameWin() {
-        score += lives * 100;
-        score += 500;
+        score += lives * 200;
+        score += 1000;
         winSound.volume = 0.1;
         winSound.play();
         clearInterval(intervalId);
@@ -501,7 +514,7 @@ function start() {
         ctx.drawImage(homeImg, -20, -40, 500, 100);
         ctx.drawImage(bluePlanet, 40, 300 - 40, 80, 80);
         ctx.drawImage(yellowPlanet, 330, 300 - 40, 80, 80);
-        ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
+        ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth)
         
         drawBlackHole();
 
@@ -521,8 +534,14 @@ function start() {
         
     }
 
+    //Tried setting another interval for frogger, doesn't show the frogger anymore
+    // setInterval(() => {
+    //     requestAnimationFrame(ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth));
+    // }, 100)
+
     intervalId = setInterval(() => {
-        requestAnimationFrame(drawCanvas);   
+        requestAnimationFrame(drawCanvas); 
+        
     }, 20)
 
     //Showing score from start
@@ -547,5 +566,4 @@ function start() {
 
 }
 
-//window.addEventListener("load", start)
 

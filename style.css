@@ -1,10 +1,13 @@
 body {
-  background-color: rgb(1, 0, 32); 
+  background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
+  background-size: 100% auto;
+  background-repeat:repeat;
   color: white;
   margin: 0;
   padding: 0;
   text-align: center;
   font-family: 'Press Start 2P', cursive;
+  height: 100vh;
 }
 
 /* Splash */
@@ -15,7 +18,6 @@ body {
   margin-top: 0px;
   padding-top: 0px;
   margin-bottom: 0px;
-  height: 100%;
 }
 
 .music {
@@ -31,23 +33,23 @@ body {
 
 .music:focus {outline:0;}
 
-.splashScreen {
-  background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
-  background-size: 100% auto;
-  background-repeat: repeat;
-  height: 100%;
-}
-
 .mainSplash {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   margin: 0px;
-  
+}
+
+input {
+  margin-top: 20px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px 15px;
 }
 
 .display-4 {
-  font-size: 40px;
+  font-size: 35px;
   margin-top: 10px;
   margin-bottom: 0px;
   color: #27c208;
@@ -56,8 +58,8 @@ body {
 }
 
 .keyHead {
-  font-size: 25px;
-  margin-bottom: 30px;
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
 .keys {
@@ -65,11 +67,12 @@ body {
   padding: 0;
   font-size: 14px;
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .lead {
   padding: 20px;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 25px;
 }
 
@@ -78,14 +81,14 @@ body {
   margin-bottom: 0px;
   padding-bottom: 0px;
   border-radius: 50%;
-  height: 300px;
-  width: 300px;
-  font-size: 50px;
+  height: 20vw;
+  width: 20vw;
+  font-size: 3.5vw;
 }
 
 .frogLY {
-  width: 20%;
-  height: 20%;
+  width: 15vw;
+  height: 15vw;
   border: 5px solid #dc3545;
   margin: 30px;
   margin-bottom: 0px;
@@ -96,6 +99,7 @@ body {
 /* Game */
 .gamescreen {
   height: 100%;
+  background-color:  rgb(1, 0, 32);
 }
 
 .score-lives {
@@ -119,14 +123,7 @@ body {
 
 /* GameOver */
 .win-lose-text{
-  padding-top: 50px;
-}
-
-.background-gameover {
-  background-image: url('images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
-  background-size: 100% auto;
-  background-repeat: repeat-y;
-  height: 100%;
+  padding-top: 40px;
 }
 
 .subtitle {
@@ -136,9 +133,9 @@ body {
 #restart-btn {
   margin-top: 20px;
   border-radius: 50%;
-  height: 300px;
-  width: 300px;
-  font-size: 40px;
+  height: 18vw;
+  width: 18vw;
+  font-size: 2.5vw;
 }
 
 .honor {
@@ -160,6 +157,7 @@ body {
 .highscores {
   list-style-position: inside;
   padding-left: 0px;
+  font-size: 15px;
 }
 
 .score-title {
