@@ -27,30 +27,41 @@ function start() {
     let yellowPlanet = new Image();
     yellowPlanet.src = './images/yellowPlanet.png';
 
+    //Game rows
+    let row9 = 560
+    let row8 = 510
+    let row7= 460;
+    let row6 = 410;
+    let row5 = 360;
+    let row4 = 210;
+    let row3 = 160;
+    let row2 = 120;
+    let row1 = 70;
+
     // Asteroids
     let astImg = new Image();
     astImg.src = './images/astSmall.png';
 
     // Asteroids rows
-    let ast1 = [{x:-30, y: 70}];
-    let ast2 = [{x:500, y: 110}, {x:530, y: 110}, {x:560, y: 110}];
-    let ast3 = [{x:500, y: 160}];
-    let ast4 = [{x:-30, y: 210}, {x:0, y: 210}];
-    let ast5 = [{x:100, y: 360}];
-    let ast6 = [{x:200, y: 410}, {x:530, y: 410}];
-    let ast7 = [{x:150, y: 460}];
-    let ast8 = [{x:330, y: 510}, {x:360, y: 510}];
+    let ast1 = [{x:-30, y: row1}];
+    let ast2 = [{x:500, y: row2}, {x:530, y: row2}, {x:560, y: row2}];
+    let ast3 = [{x:500, y: row3}];
+    let ast4 = [{x:-30, y: row4}, {x:0, y: row4}];
+    let ast5 = [{x:100, y: row5}];
+    let ast6 = [{x:200, y: row6}, {x:530, y: row6}];
+    let ast7 = [{x:120, y: row7}];
+    let ast8 = [{x:330, y: row8}, {x:360, y: row8}];
 
     //Aliens
     let alienImg = new Image();
     alienImg.src = './images/alien.png';
 
-    let alien2 = [{x:400, y: 110}]
-    let alien7 = [{x:50, y: 460}];
+    let alien2 = [{x:400, y: row2}]
+    let alien7 = [{x:-150, y: row7}];
 
     // Variables imgs
     let frogX = 208;
-    let frogY = 560;
+    let frogY = row9;
     let frogWidth = 35;
     let halfWidth = canvas.width/2; 
     let bHX = 225;
@@ -60,7 +71,7 @@ function start() {
     //Variables score and lives
     let player = playerName;
     let lives = 3;
-    let score = 3000;
+    let score = 1500;
     let highscores;
 
     //Variables keys
@@ -176,7 +187,7 @@ function start() {
             if (alien2[i].x === 150) {
                 alien2.push({
                     x: 500,
-                    y: 110
+                    y: row2
                 });
             }
             checkAlienCollision(alien2);
@@ -192,10 +203,10 @@ function start() {
             if (alien7[i].x === 630) {
                 alien7.slice(-1);
             }
-            if (alien7[i].x === 150) {
+            if (alien7[i].x === 130) {
                 alien7.push({
                     x: -30,
-                    y: 460
+                    y: row7
                 });
             }
             checkAlienCollision(alien7);
@@ -255,7 +266,7 @@ function start() {
             if (ast1[i].x === 200) {
                 ast1.push({
                     x: -30,
-                    y: 70
+                    y: row1
                 });
             }
 
@@ -275,7 +286,7 @@ function start() {
             if (ast2[i].x === 150) {
                 ast2.push({
                     x: 500,
-                    y: 110
+                    y: row2
                 });
             }
 
@@ -295,7 +306,7 @@ function start() {
             if (ast3[i].x === 300) {
                 ast3.push({
                     x: 500,
-                    y: 160
+                    y: row3
                 });
             }
 
@@ -307,7 +318,7 @@ function start() {
     function drawAsteroid4() {
         for (let i=0; i < ast4.length; i++) {
             ctx.drawImage(astImg, ast4[i].x, ast4[i].y);
-            ast4[i].x += 3;
+            ast4[i].x += 2;
 
             if (ast4[i].x === 630) {
                 ast4.slice(-1);
@@ -315,7 +326,7 @@ function start() {
             if (ast4[i].x === 150) {
                 ast4.push({
                     x: -30,
-                    y: 210
+                    y: row4
                 });
             }
 
@@ -335,7 +346,7 @@ function start() {
             if (ast5[i].x === 110) {
                 ast5.push({
                     x: -30,
-                    y: 360
+                    y: row5
                 });
             }
 
@@ -347,7 +358,7 @@ function start() {
     function drawAsteroid6() {
         for (let i=0; i < ast6.length; i++) {
             ctx.drawImage(astImg, ast6[i].x, ast6[i].y);
-            ast6[i].x -= 2;
+            ast6[i].x -= 3;
 
             if (ast6[i].x === -60) {
                 ast6.slice(0);
@@ -355,7 +366,7 @@ function start() {
             if (ast6[i].x === 200) {
                 ast6.push({
                     x: 500,
-                    y: 410
+                    y: row6
                 });
             }
 
@@ -372,10 +383,10 @@ function start() {
             if (ast7[i].x === 630) {
                 ast7.slice(-1);
             }
-            if (ast7[i].x === 160) {
+            if (ast7[i].x === 130) {
                 ast7.push({
                     x: -30,
-                    y: 460
+                    y: row7
                 });
             }
 
@@ -395,24 +406,13 @@ function start() {
             if (ast8[i].x === 300) {
                 ast8.push({
                     x: 500,
-                    y: 510
+                    y: row8
                 });
             }
 
             checkAsteroidCollisionBottom(ast8);
         }
     }
-
-    let row9 = 560
-    let row8 = 510
-    let row7= 460;
-    let row6 = 410;
-    let row5 = 360;
-    let row4 = 210;
-    let row3 = 160;
-    let row2 = 120;
-    let row1 = 70;
-    let row0 = 10;
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
@@ -539,7 +539,6 @@ function start() {
 
     intervalId = setInterval(() => {
         requestAnimationFrame(drawCanvas); 
-        
     }, 20)
 
     //Showing score from start

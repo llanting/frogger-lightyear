@@ -24,8 +24,17 @@ function createSplashScreen() {
     splashScreen = buildPage(`
         <main class="splashScreen">
             <div class="title jumbotron">
-                <button class="music"><img src="./images/musicBtn.png"></button>
-                <h1 class="display-4">Frogger Lightyear</h1>
+                <div id="header">
+                    <button class="music"><img src="./images/musicBtn.png"></button>
+                    <h1 class="display-4">
+                    <span class="one">F</span> 
+                    <span class="two">r</span>
+                    <span class="three">o</span> 
+                    <span class="four">g</span> 
+                    <span class="five">g</span> 
+                    <span class="six">e</span>  
+                    <span class="seven">r</span> Lightyear</h1>
+                </div>
                 <p class="lead">Frogger has been on an amazing space-adventure. Help him get home safe by eating your way through aliens and visiting planets. But watch out for asteroids and that black hole...</p>
                 <div>
                     <h3 class="keyHead">Keys</h3>
@@ -45,6 +54,45 @@ function createSplashScreen() {
         </main>`);
 
     bodyIndex.prepend(splashScreen);
+
+    let newChar;
+    setInterval(() => {
+        changeTitle(0);
+        document.querySelector('.one').innerHTML = newChar;
+        setTimeout(() => {
+            changeTitle(1)
+            document.querySelector('.two').innerHTML = newChar;
+        }, 500);
+        setTimeout(() => {
+            changeTitle(2)
+            document.querySelector('.three').innerHTML = newChar;
+        }, 1000);
+        setTimeout(() => {
+            changeTitle(3)
+            document.querySelector('.four').innerHTML = newChar;
+        }, 1500);
+        setTimeout(() => {
+            changeTitle(4)
+            document.querySelector('.five').innerHTML = newChar;
+        }, 2000);
+        setTimeout(() => {
+            changeTitle(5)
+            document.querySelector('.six').innerHTML = newChar;
+        }, 2500);
+        setTimeout(() => {
+            changeTitle(6)
+            document.querySelector('.seven').innerHTML = newChar;
+        }, 3000);
+    }, 700)
+
+    function changeTitle(index){
+        let titleStr = document.querySelector('.display-4').innerText;
+        let titleArr = titleStr.split(' ');
+        console.log(titleArr)
+        
+        titleArr[index] = `<img src="./images/rsz_1frogger.png">`;
+        newChar = titleArr[index].toString();
+    }
 
     function getPlayerName() {
         if (!document.querySelector('input').value) {
