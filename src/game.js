@@ -36,9 +36,9 @@ function start() {
     let ast2 = [{x:500, y: 110}, {x:530, y: 110}, {x:560, y: 110}];
     let ast3 = [{x:500, y: 160}];
     let ast4 = [{x:-30, y: 210}, {x:0, y: 210}];
-    let ast5 = [{x:-30, y: 360}];
-    let ast6 = [{x:500, y: 410}, {x:530, y: 410}];
-    let ast7 = [{x:-30, y: 460}];
+    let ast5 = [{x:100, y: 360}];
+    let ast6 = [{x:200, y: 410}, {x:530, y: 410}];
+    let ast7 = [{x:150, y: 460}];
     let ast8 = [{x:330, y: 510}, {x:360, y: 510}];
 
     //Aliens
@@ -46,7 +46,7 @@ function start() {
     alienImg.src = './images/alien.png';
 
     let alien2 = [{x:400, y: 110}]
-    let alien7 = [{x:-130, y: 460}];
+    let alien7 = [{x:50, y: 460}];
 
     // Variables imgs
     let frogX = 208;
@@ -307,7 +307,7 @@ function start() {
     function drawAsteroid4() {
         for (let i=0; i < ast4.length; i++) {
             ctx.drawImage(astImg, ast4[i].x, ast4[i].y);
-            ast4[i].x += 1;
+            ast4[i].x += 3;
 
             if (ast4[i].x === 630) {
                 ast4.slice(-1);
@@ -332,7 +332,7 @@ function start() {
             if (ast5[i].x === 630) {
                 ast5.slice(-1);
             }
-            if (ast5[i].x === 100) {
+            if (ast5[i].x === 110) {
                 ast5.push({
                     x: -30,
                     y: 360
@@ -372,7 +372,7 @@ function start() {
             if (ast7[i].x === 630) {
                 ast7.slice(-1);
             }
-            if (ast7[i].x === 150) {
+            if (ast7[i].x === 160) {
                 ast7.push({
                     x: -30,
                     y: 460
@@ -416,14 +416,14 @@ function start() {
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
-            frogX += 2;
+            frogX += 10;
             frogger.src = './images/froggerRight.png';
         } else if (isLeftArrow && frogX > 0) {
-            frogX -= 2;
+            frogX -= 10;
             frogger.src = './images/froggerLeft.png';
         } else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = './images/frogger.png';
-            frogY -= 2;
+            frogY -= 10;
             //Tried using if and switch, didn't work
             // if (frogY = row1) {
             //     frogY = row0;
@@ -439,7 +439,7 @@ function start() {
             //     frogY = row7;
             // }
         } else if (isDownArrow && frogY + frogWidth < 560) {
-            frogY += 2;
+            frogY += 10;
             frogger.src = './images/froggerDown.png';
         }
     }
