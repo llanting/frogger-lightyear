@@ -58,6 +58,7 @@ function start() {
     let blackHoleR = 50;
 
     //Variables score and lives
+    let player = playerName;
     let lives = 3;
     let score = 3000;
     let highscores;
@@ -428,9 +429,9 @@ function start() {
             frogger.src = '/images/froggerDown.png';
         }
     }
-  
-    function getHighScore(gameScore) {
-        let result = {score: gameScore};
+    
+    function getHighScore(playerName, gameScore) {
+        let result = {name: playerName, score: gameScore};
         let savedScores = localStorage.getItem('highscore') || '[]';
         highscores = [...JSON.parse(savedScores), result];
         highscores.sort((a,b) => b.score- a.score);
@@ -438,11 +439,11 @@ function start() {
 
         localStorage.setItem('highscore', JSON.stringify(highscores));
         
-        document.querySelector('.scoreLi1').innerText = `${highscores[0].score}`;
-        document.querySelector('.scoreLi2').innerText = `${highscores[1].score}`;
-        document.querySelector('.scoreLi3').innerText = `${highscores[2].score}`;
-        document.querySelector('.scoreLi4').innerText = `${highscores[3].score}`;
-        document.querySelector('.scoreLi5').innerText = `${highscores[4].score}`;
+        document.querySelector('.scoreLi1').innerText = `${highscores[0].name} : ${highscores[0].score}`;
+        document.querySelector('.scoreLi2').innerText = `${highscores[1].name} : ${highscores[1].score}`;
+        document.querySelector('.scoreLi3').innerText = `${highscores[2].name} : ${highscores[2].score}`;
+        document.querySelector('.scoreLi4').innerText = `${highscores[3].name} : ${highscores[3].score}`;
+        document.querySelector('.scoreLi5').innerText = `${highscores[4].name} : ${highscores[4].score}`;
     }
 
     function gameOver() {
@@ -451,9 +452,9 @@ function start() {
         squashMusic.volume = 0.1;
         squashMusic.play();
         removeGameScreen();
-        createGOScreen(score);
+        createGOScreen();
         document.querySelector('.end-score').innerText = `Your score: ${score}`;
-        getHighScore(score);
+        getHighScore(player, score);
     }
 
     function gameWin() {
@@ -466,7 +467,7 @@ function start() {
         removeGameScreen();
         createWinScreen();
         document.querySelector('.end-score').innerText = `Your score: ${score}`;
-        getHighScore(score);
+        getHighScore(player, score);
     }
 
     function checkNumberLives() {
@@ -547,3 +548,4 @@ function start() {
 }
 
 //window.addEventListener("load", start)
+

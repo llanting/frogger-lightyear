@@ -12,14 +12,14 @@ let splashScreen;
 let gameScreen;
 let gameOverScreen;
 let winScreen;
-let name;
-let input;
+let playerName;
 let splashMusic = new Audio('/music/splashMusic.mp3')
 let winSound = new Audio('/music/snd_music_victorytheme.ogg');
 let bgMusic = new Audio('/music/backgroundmusic.mp3');
 bgMusic.loop = true;
 
 //Splash
+
 function createSplashScreen() {
     splashScreen = buildPage(`
         <main class="splashScreen">
@@ -46,6 +46,14 @@ function createSplashScreen() {
 
     bodyIndex.prepend(splashScreen);
 
+    function getPlayerName() {
+        if (!document.querySelector('input').value) {
+            playerName = 'Frogger';
+        } else {
+            playerName = document.querySelector('input').value;
+        }
+    }
+
     splashMusic.volume = 0.1;
     let splashOn = true;
     splashMusic.play();
@@ -67,6 +75,7 @@ function createSplashScreen() {
     let startMusic = new Audio('/music/coinin.wav');
 
     startBtn.addEventListener('click', function() {
+        getPlayerName();
         splashMusic.pause();
         startMusic.volume = 0.1;
         startMusic.play();
@@ -110,13 +119,13 @@ function removeGameScreen() {
 }
 
 //Game over
-function createGOScreen(score) {
+function createGOScreen() {
     gameOverScreen = buildPage(`
     <main class="background-gameover">
         <div class="jumbotron">
             <h3 class="win-lose-text">GAME OVER!</h3>
             <p class="lead">Frogger Lightyear floats in space for ever...</p>
-            <p class="end-score">Your score: ${score}</p>
+            <p class="end-score"></p>
             <div class="scoreboard">
                 <h2 class="score-title">High Scores:</h2>
                 <ol class='highscores'>
