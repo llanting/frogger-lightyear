@@ -96,7 +96,6 @@ function createSplashScreen() {
         let titleArr = titleStr.split(' ');
         titleArr[index] = `<img src="./images/rsz_1frogger.png">`;
         newChar = titleArr[index].toString();
-        console.log(titleArr)
     }
 
     function getPlayerName() {
@@ -142,7 +141,7 @@ function removeSplashScreen() {
     splashScreen.remove();
 }
 
-window.addEventListener("load", createSplashScreen)
+window.addEventListener("load", createSplashScreen);
 
 //Game screen
 function createGameScreen() {
@@ -157,13 +156,13 @@ function createGameScreen() {
                 <img src="./images/frogger.png" alt='life' class="lives life">
             </div> 
             <div class="canvas-container">
-                <canvas id='game-canvas' width="450" height="600"></canvas>
+                <canvas id='game-canvas' width="500" height="650"></canvas>
             </div>
         </div>
     </main>`);
     
     bodyIndex.prepend(gameScreen);
-
+    window.addEventListener("load", createGameScreen)
 }
 
 function removeGameScreen() {

@@ -33,6 +33,7 @@ body {
   align-self: right;
   margin-top: 0px;
   padding-top: 50px;
+  padding-bottom: 10px;
 }
 
 .music:focus {outline:0;}
@@ -107,7 +108,7 @@ input {
 }
 
 .score-lives {
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 .lives {
