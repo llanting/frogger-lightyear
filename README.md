@@ -4,6 +4,18 @@
 ## Description
 Frogger Lightyear is inspired by 80s classic Frogger. The player move from the bottom of the screen to the top, avoiding moving asteroids and a black hole on its way. The player wins by reaching the top of the gameboard. The player loses when the damage to its ship is too great or he hits the black hole. A score is calculated based on the amount of time the game lasted.
 
+## Links
+
+### Trello
+[Link url](https://trello.com/b/qnVwRRu1/frogger-lightyear)
+
+### Git
+URls for the project repo and deploy:
+- [Link Repo](https://github.com/llanting/frogger-lightyear)
+- [Link Deploy](https://llanting.github.io/frogger-lightyear/)
+
+### Slides
+[URls for the project presentation](https://docs.google.com/presentation/d/1kaBg_BLZZyEgQ7DL6YJcAUsF5Lvkmq2P-YilwCVFr0g/edit?usp=sharing)
 
 ## MVP (DOM - CANVAS)
 
@@ -28,86 +40,39 @@ Frogger Lightyear is inspired by 80s classic Frogger. The player move from the b
 ## Data Structure
 
 # main.js
-
-<!-- button (with high border radius for circle) and name (changing from frogs to letters) -->
 - createSplashScreen () {}
-
+- removeSplashScreen() {}
 - createGameScreen () {}
-
-<!-- game over/you win (same tactic as chronometer change), score and restart button -->
+- removeGameScreen() {}
 - createGameOverScreen () {}
-
-- startGame() {}
+- removeGameOverScreen() {}
+- createWinScreen() ()
+- removeWinScreen() {}
 
 # game.js
-
-<!-- creating all variables -->
- - gameVars() {}
-
- - drawCanvas() {}
-
-<!-- Drawing three fixed position planets -->
- - planet() { x, y, direction, size }
- - blackhole() { x, y, direction, size }
- - homePlanet() { x, y, direction, size }
-
-<!-- setting start-position -->
- - updateCanvas() {}
-
-<!-- setting gameloop, addEventListeners for keys -->
- - loop() {}
-
- - clearCanvas() {}
-
- <!-- declaring points of collissions and enabling lives - 1 -->
- - checkCollisions() {}
-
- <!-- declaring game over function (0 lives / black hole / time === 0) -->
- - gameOver() {}
-
-<!-- creating asteroids during the game (look at flappy bird example) -->
- - addAsteroid() {}
-
-<!-- calculating score -->
-- calculateScore() {}
-
-# frogger.js
-
-- frogger() { x, y, direction, size }
-
-<!-- creating and adding frogger to canvas -->
-- draw() {}
-
-<!-- determining frog movement -->
-- move() {}
-
-<!-- preventing screen collission -->
-- checkScreenCollision() {}
-
-- checkCollisionAsteroid() {}
-
-- checkCollissionPlanet() {}
-
-# asteroid.js
-
-- asteroid() { x, y, direction, size }
-
-<!-- creating and adding asteroids to canvas -->
-- draw() {}
-
-<!-- determining asteroid movement, left to right, right to left -->
-- move() {}
-
-<!-- screen collission, asteroids in array -> remove from array -->
-- checkScreenCollision() {}
-
+- start() {}
+- drawCanvas() {}
+- moveFrogger() {}
+- drawBlackHole() {}
+- checkBlackHoleCollision() {}
+- drawAliens() {}
+- checkAlienCollision() {}
+- class Asteroid {}
+- checkAsteroidCollision() {}
+- getHighscore() {}
+- gameOver() {}
+- gameWin() {}
+- checkNumberLives() {}
+- checkFroggerWin() {}
+- showScore() {}
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)
 
 - splashScreen
 - gameScreen
-- gameOver or gameWinScreen (same screen, text depending on outcome)
+- gameOver (if player dies before reaching the top)
+- gameWin (if player reaches the top)
 
 ## Task
 
@@ -133,17 +98,4 @@ Definition of the different states and their transition (transition functions)
 - asteroid - move
 - planet - draw
 
-
-## Links
-
-### Trello
-[Link url](https://trello.com/b/qnVwRRu1/frogger-lightyear)
-
-### Git
-URls for the project repo and deploy:
-- [Link Repo](https://github.com/llanting/frogger-lightyear)
-- [Link Deploy](https://llanting.github.io/frogger-lightyear/)
-
-### Slides
-[URls for the project presentation](https://docs.google.com/presentation/d/1kaBg_BLZZyEgQ7DL6YJcAUsF5Lvkmq2P-YilwCVFr0g/edit?usp=sharing)
 

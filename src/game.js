@@ -125,10 +125,10 @@ function start() {
 
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
-            frogX += 55;
+            frogX += 50;
             frogger.src = './images/froggerRight.png';
         } else if (isLeftArrow && frogX > 0) {
-            frogX -= 55;
+            frogX -= 50;
             frogger.src = './images/froggerLeft.png';
         } else if (isUpArrow && frogY + frogWidth > 0) {
             frogger.src = './images/frogger.png';
@@ -185,6 +185,18 @@ function start() {
         }
     }
 
+    // let yArr = [555, 500, 445, 390, 225, 170, 115, 60];
+    // let randomY = yArr[Math.floor(Math.random() * yArr.length)];
+    // function drawRandomLife() {
+    //     let liveImg = new Image();
+    //     liveImg.src = './images/frogger.png';
+    //     let lifeX = 0;
+    //     let xSpeed = 1;
+        
+    //     lifeX += 5;
+    //     ctx.drawImage(liveImg, lifeX, randomY, 40, 40);
+    // }
+
     //Alien line 2
     function alienLine2() {
         for (let i=0; i < alien2.length; i++) {
@@ -235,193 +247,119 @@ function start() {
         }
     }
     
-    // Check asteroids four top lines
-    function checkAsteroidCollisionTop(astArr, row) {
+    // Check asteroids collision
+    function checkAsteroidCollision(astArr, row) {
         for (let i=0; i < astArr.length; i++) {
             if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 35) && (frogY < row + 35 && frogY + frogWidth > row)) {
                 checkNumberLives();
-                if (frogX < canvas.width/2) {
-                        frogX = 65;
-                        frogY = canvas.height /2 - frogWidth;
+                if (frogY > 360) {
+                    frogX = halfWidth - frogWidth/2;
+                    frogY = row9;
                 } else {
-                        frogX = 370;
-                        frogY = canvas.height /2 - frogWidth;
+                    if (frogX < canvas.width/2) {
+                            frogX = 65;
+                            frogY = canvas.height /2 - frogWidth;
+                    } else {
+                            frogX = 370;
+                            frogY = canvas.height /2 - frogWidth;
+                    }
                 }
             }
         }
     } 
 
-    // Check asteroids four bottom lines
-    function checkAsteroidCollisionBottom(astArr, row) {
-        for (let i=0; i < astArr.length; i++) {
-            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 35) && (frogY < row + 35 && frogY + frogWidth > row)) {
-                checkNumberLives();
-                frogX = halfWidth - frogWidth/2;
-                frogY = row9;
-            }
+    class Asteroid {
+        constructor(astX, row, astWidth, astSpeed, astObj, astPushX, xPush) {
+            this.astX = astX;
+            this.row = row;
+            this.astWidth = astWidth;
+            this.astSpeed = astSpeed;
+            this.astObj = astObj;
+            this.astPushX = astPushX;
+            this.xPush = xPush;
         }
+
+        drawRightTop () {
+            for (let i=0; i < this.astObj.length; i++) {
+                ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
+                this.astObj[i].x += this.astSpeed;
+
+                if (this.astObj[i].x === 650) {
+                    this.astObj.slice(-1);
+                }
+                if (this.astObj[i].x === this.astPushX) {
+                    this.astObj.push({
+                        x: this.xPush,
+                        y: this.row
+                    });
+                }
+            }
+            checkAsteroidCollision(this.astObj, this.row);
+        };
+
+        drawRightBottom () {
+            for (let i=0; i < this.astObj.length; i++) {
+                ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
+                this.astObj[i].x += this.astSpeed;
+
+                if (this.astObj[i].x === 650) {
+                    this.astObj.slice(-1);
+                }
+                if (this.astObj[i].x === this.astPushX) {
+                    this.astObj.push({
+                        x: this.xPush,
+                        y: this.row
+                    });
+                }
+            }
+            checkAsteroidCollision(this.astObj, this.row);
+        };
+
+        drawLeftTop() {
+            for (let i=0; i < this.astObj.length; i++) {
+                ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
+                this.astObj[i].x -= this.astSpeed;
+    
+                if (this.astObj[i].x === -90) {
+                    this.astObj.slice(0);
+                }
+                if (this.astObj[i].x === this.astPushX) {
+                    this.astObj.push({
+                        x: this.xPush,
+                        y: this.row
+                    });
+                }
+            }
+            checkAsteroidCollision(this.astObj, this.row);
+        };
+
+        drawLeftBottom() {
+            for (let i=0; i < this.astObj.length; i++) {
+                ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
+                this.astObj[i].x -= this.astSpeed;
+    
+                if (this.astObj[i].x === -90) {
+                    this.astObj.slice(0);
+                }
+                if (this.astObj[i].x === this.astPushX) {
+                    this.astObj.push({
+                        x: this.xPush,
+                        y: this.row
+                    });
+                }
+            }
+            checkAsteroidCollision(this.astObj, this.row);
+        };
     }
 
-    //Asteroid functions, 8 times for 8 lines
-    // Line 1
-    function drawAsteroid1() {
-        for (let i=0; i < ast1.length; i++) {
-            ctx.drawImage(astImg, ast1[i].x, row1, 35, 35);
-            ast1[i].x += 3;
-
-            if (ast1[i].x === 650) {
-                ast1.slice(-1);
-            }
-            if (ast1[i].x === 201) {
-                ast1.push({
-                    x: -30,
-                    y: row1
-                });
-            }
-
-            checkAsteroidCollisionTop(ast1, row1);
-        }
-    }
-
-    // Line 2
-    function drawAsteroid2() {
-        for (let i=0; i < ast2.length; i++) {
-            ctx.drawImage(astImg, ast2[i].x, row2, 35, 35);
-            ast2[i].x -= 1;
-
-            if (ast2[i].x === -90) {
-                ast2.slice(0);
-            }
-            if (ast2[i].x === 150) {
-                ast2.push({
-                    x: 500,
-                    y: row2
-                });
-            }
-
-            checkAsteroidCollisionTop(ast2, row2);
-        }
-    }
-
-    // Line 3
-    function drawAsteroid3() {
-        for (let i=0; i < ast3.length; i++) {
-            ctx.drawImage(astImg, ast3[i].x, row3, 35, 35);
-            ast3[i].x -= 2;
-
-            if (ast3[i].x === -30) {
-                ast3.shift();
-            }
-            if (ast3[i].x === 300) {
-                ast3.push({
-                    x: 500,
-                    y: row3
-                });
-            }
-
-            checkAsteroidCollisionTop(ast3, row3);
-        }
-    }
-
-    // Line 4
-    function drawAsteroid4() {
-        for (let i=0; i < ast4.length; i++) {
-            ctx.drawImage(astImg, ast4[i].x, row4, 35, 35);
-            ast4[i].x += 1;
-
-            if (ast4[i].x === 650) {
-                ast4.slice(-1);
-            }
-            if (ast4[i].x === 151) {
-                ast4.push({
-                    x: -35,
-                    y: row4
-                });
-            }
-
-            checkAsteroidCollisionTop(ast4, row4);
-        }
-    }
-
-    // Line 5
-    function drawAsteroid5() {
-        for (let i=0; i < ast5.length; i++) {
-            ctx.drawImage(astImg, ast5[i].x, row5, 35, 35);
-            ast5[i].x += 2;
-
-            if (ast5[i].x === 650) {
-                ast5.slice(-1);
-            }
-            if (ast5[i].x === 260) {
-                ast5.push({
-                    x: -30,
-                    y: row5
-                });
-            }
-
-            checkAsteroidCollisionBottom(ast5, row5);
-        }
-    }
-
-    // Line 6
-    function drawAsteroid6() {
-        for (let i=0; i < ast6.length; i++) {
-            ctx.drawImage(astImg, ast6[i].x, row6, 35, 35);
-            ast6[i].x -= 2;
-            if (ast6[i].x === -100) {
-                ast6.slice(0);
-            }
-            if (ast6[i].x === 200) {
-                ast6.push({
-                    x: 500,
-                    y: row6
-                });
-            }
-
-            checkAsteroidCollisionBottom(ast6, row6);
-        }
-    }
-
-    // Line 7
-    function drawAsteroid7() {
-        for (let i=0; i < ast7.length; i++) {
-            ctx.drawImage(astImg, ast7[i].x, row7, 35, 35);
-            ast7[i].x += 2;
-
-            if (ast7[i].x === 650) {
-                ast7.slice(-1);
-            }
-            if (ast7[i].x === 130) {
-                ast7.push({
-                    x: -30,
-                    y: row7
-                });
-            }
-
-            checkAsteroidCollisionBottom(ast7, row7);
-        }
-    }
-
-    // Line 8
-    function drawAsteroid8() {
-        for (let i=0; i < ast8.length; i++) {
-            ctx.drawImage(astImg, ast8[i].x, row8, 35, 35);
-            ast8[i].x--;
-
-            if (ast8[i].x === -60) {
-                ast8.slice(0);
-            }
-            if (ast8[i].x === 300) {
-                ast8.push({
-                    x: 500,
-                    y: row8
-                });
-            }
-
-            checkAsteroidCollisionBottom(ast8, row8);
-        }
-    }
-   
+    let astArr1 = new Asteroid (-30, row1, 35, 3, ast1, 201, -30);
+    let astArr4 = new Asteroid (-40, row4, 35, 1, ast4, 151, -35);
+    let astArr5 = new Asteroid (250, row5, 35, 2, ast5, 260, -30);
+    let astArr7 = new Asteroid (120, row7, 35, 2, ast7, 130, -30);
+    let astArr2 = new Asteroid (500, row2, 35, 1, ast2, 150, 500);
+    let astArr3 = new Asteroid (500, row3, 35, 2, ast3, 300, 500);
+    let astArr6 = new Asteroid (330, row6, 35, 2, ast6, 200, 500);
+    let astArr8 = new Asteroid (330, row8, 35, 1, ast8, 300, 500);
     
     function getHighScore(playerName, gameScore) {
         let result = {name: playerName, score: gameScore};
@@ -488,23 +426,22 @@ function start() {
         ctx.drawImage(bluePlanet, 40, canvas.height/2 - 45, 90, 90);
         ctx.drawImage(yellowPlanet, 360, canvas.height/2 - 45, 90, 90);
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
-
+        
         drawBlackHole();
-
-        drawAsteroid8();
-        drawAsteroid7();
-        drawAsteroid6();
-        drawAsteroid5();
-        drawAsteroid4();
-        drawAsteroid3();
-        drawAsteroid2();
-        drawAsteroid1();
+       
+        astArr1.drawRightTop();
+        astArr4.drawRightTop();
+        astArr5.drawRightBottom();
+        astArr7.drawRightBottom();
+        astArr2.drawLeftTop();
+        astArr3.drawLeftTop();
+        astArr6.drawLeftBottom();
+        astArr8.drawLeftBottom();
 
         alienLine2();
         alienLine7();
 
-        checkFroggerWin();
-        
+        checkFroggerWin(); 
     }
 
     intervalId = setInterval(() => {
