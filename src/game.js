@@ -33,7 +33,6 @@ function start() {
     let row7= 500;
     let row6 = 445;
     let row5 = 390;
-    let gap;
     let row4 = 225;
     let row3 = 170;
     let row2 = 115;
@@ -99,29 +98,17 @@ function start() {
         }
         if (event.key === 'ArrowRight') {
             isRightArrow = true;
-            isLeftArrow = false;
-            isUpArrow = false;
-            isDownArrow = false;
             moveFrogger();
             playHop();
         } else if (event.key === 'ArrowLeft') {
             isLeftArrow = true;
-            isRightArrow = false;
-            isUpArrow = false;
-            isDownArrow = false;
             moveFrogger();
             playHop();
         } else if (event.key === 'ArrowUp') {
             isUpArrow = true;
-            isLeftArrow = false;
-            isRightArrow = false;
-            isDownArrow = false;
             moveFrogger();
             playHop();
         } else if (event.key === 'ArrowDown') {
-            isUpArrow = false;
-            isLeftArrow = false;
-            isRightArrow = false;
             isDownArrow = true;
             moveFrogger();
             playHop();
@@ -136,12 +123,28 @@ function start() {
         isDownArrow = false;
     })
 
+    function moveFrogger() {
+        if (isRightArrow && frogX < canvas.width - frogWidth) {
+            frogX += 55;
+            frogger.src = './images/froggerRight.png';
+        } else if (isLeftArrow && frogX > 0) {
+            frogX -= 55;
+            frogger.src = './images/froggerLeft.png';
+        } else if (isUpArrow && frogY + frogWidth > 0) {
+            frogger.src = './images/frogger.png';
+            frogY -= 55;
+        } else if (isDownArrow && frogY + frogWidth < 650) {
+            frogY += 55;
+            frogger.src = './images/froggerDown.png';
+        }
+    }
+
     //Draw black hole
     function drawBlackHole(){
         ctx.beginPath();
         ctx.arc(bHX, bHY, blackHoleR, 0, Math.PI*2);
         let blackHole = new Image();
-        blackHole.src = './images/blackHoleDef.png';
+        blackHole.src = './images/blackHole.png';
         let blackHolepattern = ctx.createPattern(blackHole, "repeat");
         ctx.fillStyle = blackHolepattern;
         ctx.fill();
@@ -185,7 +188,7 @@ function start() {
     //Alien line 2
     function alienLine2() {
         for (let i=0; i < alien2.length; i++) {
-            ctx.drawImage(alienImg, alien2[i].x, alien2[i].y);
+            ctx.drawImage(alienImg, alien2[i].x, row2);
             alien2[i].x -= 1;
 
             if (alien2[i].x === -90) {
@@ -197,14 +200,14 @@ function start() {
                     y: row2
                 });
             }
-            checkAlienCollision(alien2);
+            checkAlienCollision(alien2, row2);
         }
     }
 
     //Alien line 7
     function alienLine7() {
         for (let i=0; i < alien7.length; i++) {
-            ctx.drawImage(alienImg, alien7[i].x, alien7[i].y);
+            ctx.drawImage(alienImg, alien7[i].x, row7);
             alien7[i].x += 2;
 
             if (alien7[i].x === 630) {
@@ -216,14 +219,14 @@ function start() {
                     y: row7
                 });
             }
-            checkAlienCollision(alien7);
+            checkAlienCollision(alien7, row7);
         }
     }
 
     //Check collision aliens (for points)
-    function checkAlienCollision(alienArr) {
+    function checkAlienCollision(alienArr, row) {
         for (let i=0; i < alienArr.length; i++) {
-            if ((frogX + frogWidth > alienArr[i].x && frogX < alienArr[i].x + 30) && (frogY < alienArr[i].y + 30 && frogY + frogWidth > alienArr[i].y)) {
+            if ((frogX + frogWidth > alienArr[i].x && frogX < alienArr[i].x + 30) && (frogY < row + 30 && frogY + frogWidth > row)) {
                 score += 200;
                 alienArr.splice(i, 1);
                 chew.volume = 0.1;
@@ -231,11 +234,11 @@ function start() {
             }
         }
     }
-
+    
     // Check asteroids four top lines
-    function checkAsteroidCollisionTop(astArr) {
+    function checkAsteroidCollisionTop(astArr, row) {
         for (let i=0; i < astArr.length; i++) {
-            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 30) && (frogY < astArr[i].y + 30 && frogY + frogWidth > astArr[i].y)) {
+            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 35) && (frogY < row + 35 && frogY + frogWidth > row)) {
                 checkNumberLives();
                 if (frogX < canvas.width/2) {
                         frogX = 65;
@@ -249,9 +252,9 @@ function start() {
     } 
 
     // Check asteroids four bottom lines
-    function checkAsteroidCollisionBottom(astArr) {
+    function checkAsteroidCollisionBottom(astArr, row) {
         for (let i=0; i < astArr.length; i++) {
-            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 30) && (frogY < astArr[i].y + 30 && frogY + frogWidth > astArr[i].y)) {
+            if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 35) && (frogY < row + 35 && frogY + frogWidth > row)) {
                 checkNumberLives();
                 frogX = halfWidth - frogWidth/2;
                 frogY = row9;
@@ -263,27 +266,27 @@ function start() {
     // Line 1
     function drawAsteroid1() {
         for (let i=0; i < ast1.length; i++) {
-            ctx.drawImage(astImg, ast1[i].x, ast1[i].y, 35, 35);
-            ast1[i].x += 2;
+            ctx.drawImage(astImg, ast1[i].x, row1, 35, 35);
+            ast1[i].x += 3;
 
             if (ast1[i].x === 650) {
                 ast1.slice(-1);
             }
-            if (ast1[i].x === 200) {
+            if (ast1[i].x === 201) {
                 ast1.push({
                     x: -30,
                     y: row1
                 });
             }
 
-            checkAsteroidCollisionTop(ast1);
+            checkAsteroidCollisionTop(ast1, row1);
         }
     }
 
     // Line 2
     function drawAsteroid2() {
         for (let i=0; i < ast2.length; i++) {
-            ctx.drawImage(astImg, ast2[i].x, ast2[i].y, 35, 35);
+            ctx.drawImage(astImg, ast2[i].x, row2, 35, 35);
             ast2[i].x -= 1;
 
             if (ast2[i].x === -90) {
@@ -296,14 +299,14 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionTop(ast2);
+            checkAsteroidCollisionTop(ast2, row2);
         }
     }
 
     // Line 3
     function drawAsteroid3() {
         for (let i=0; i < ast3.length; i++) {
-            ctx.drawImage(astImg, ast3[i].x, ast3[i].y, 35, 35);
+            ctx.drawImage(astImg, ast3[i].x, row3, 35, 35);
             ast3[i].x -= 2;
 
             if (ast3[i].x === -30) {
@@ -316,14 +319,14 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionTop(ast3);
+            checkAsteroidCollisionTop(ast3, row3);
         }
     }
 
     // Line 4
     function drawAsteroid4() {
         for (let i=0; i < ast4.length; i++) {
-            ctx.drawImage(astImg, ast4[i].x, ast4[i].y, 35, 35);
+            ctx.drawImage(astImg, ast4[i].x, row4, 35, 35);
             ast4[i].x += 1;
 
             if (ast4[i].x === 650) {
@@ -336,14 +339,14 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionTop(ast4);
+            checkAsteroidCollisionTop(ast4, row4);
         }
     }
 
     // Line 5
     function drawAsteroid5() {
         for (let i=0; i < ast5.length; i++) {
-            ctx.drawImage(astImg, ast5[i].x, ast5[i].y, 35, 35);
+            ctx.drawImage(astImg, ast5[i].x, row5, 35, 35);
             ast5[i].x += 2;
 
             if (ast5[i].x === 650) {
@@ -356,14 +359,14 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionBottom(ast5);
+            checkAsteroidCollisionBottom(ast5, row5);
         }
     }
 
     // Line 6
     function drawAsteroid6() {
         for (let i=0; i < ast6.length; i++) {
-            ctx.drawImage(astImg, ast6[i].x, ast6[i].y, 35, 35);
+            ctx.drawImage(astImg, ast6[i].x, row6, 35, 35);
             ast6[i].x -= 2;
             if (ast6[i].x === -100) {
                 ast6.slice(0);
@@ -375,14 +378,14 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionBottom(ast6);
+            checkAsteroidCollisionBottom(ast6, row6);
         }
     }
 
     // Line 7
     function drawAsteroid7() {
         for (let i=0; i < ast7.length; i++) {
-            ctx.drawImage(astImg, ast7[i].x, ast7[i].y, 35, 35);
+            ctx.drawImage(astImg, ast7[i].x, row7, 35, 35);
             ast7[i].x += 2;
 
             if (ast7[i].x === 650) {
@@ -395,14 +398,14 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionBottom(ast7);
+            checkAsteroidCollisionBottom(ast7, row7);
         }
     }
 
     // Line 8
     function drawAsteroid8() {
         for (let i=0; i < ast8.length; i++) {
-            ctx.drawImage(astImg, ast8[i].x, ast8[i].y, 35, 35);
+            ctx.drawImage(astImg, ast8[i].x, row8, 35, 35);
             ast8[i].x--;
 
             if (ast8[i].x === -60) {
@@ -415,25 +418,10 @@ function start() {
                 });
             }
 
-            checkAsteroidCollisionBottom(ast8);
+            checkAsteroidCollisionBottom(ast8, row8);
         }
     }
    
-    function moveFrogger() {
-        if (isRightArrow && frogX < canvas.width - frogWidth) {
-            frogX += 55;
-            frogger.src = './images/froggerRight.png';
-        } else if (isLeftArrow && frogX > 0) {
-            frogX -= 55;
-            frogger.src = './images/froggerLeft.png';
-        } else if (isUpArrow && frogY + frogWidth > 0) {
-            frogger.src = './images/frogger.png';
-            frogY -= 55;
-        } else if (isDownArrow && frogY + frogWidth < 650) {
-            frogY += 55;
-            frogger.src = './images/froggerDown.png';
-        }
-    }
     
     function getHighScore(playerName, gameScore) {
         let result = {name: playerName, score: gameScore};
