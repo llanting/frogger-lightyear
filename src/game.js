@@ -2,7 +2,6 @@ function start() {
     // Draw canvas
     let canvas = document.querySelector('#game-canvas');
     canvas.style.border = '5px solid lightblue';
-
     let ctx = canvas.getContext('2d');
     
     let intervalId = 0;
@@ -27,6 +26,10 @@ function start() {
     let yellowPlanet = new Image();
     yellowPlanet.src = './images/yellowPlanet.png';
 
+    // Asteroids
+    let astImg = new Image();
+    astImg.src = './images/astSmall.png';
+   
     //Game rows
     let row9 = 610;
     let row8 = 555;
@@ -38,10 +41,6 @@ function start() {
     let row2 = 115;
     let row1 = 60;
 
-    // Asteroids
-    let astImg = new Image();
-    astImg.src = './images/astSmall.png';
-   
     // Asteroids rows
     let ast1 = [{x:-30, y: row1}];
     let ast2 = [{x:500, y: row2}, {x:535, y: row2}, {x:570, y: row2}];
@@ -85,7 +84,6 @@ function start() {
     let squashMusic = new Audio('./music/sound-frogger-squash.wav');
     let chew = new Audio('./music/eat.wav');
     
-
     function playHop() {
         hopMusic.volume = 0.1;
         hopMusic.play();
@@ -93,9 +91,6 @@ function start() {
 
     // Press arrowkey eventListener
     document.addEventListener('keydown', (event) => {
-        if (event.repeat) {
-            event.preventDefault();
-        }
         if (event.key === 'ArrowRight') {
             isRightArrow = true;
             moveFrogger();
@@ -123,6 +118,7 @@ function start() {
         isDownArrow = false;
     })
 
+    //Move frogger function
     function moveFrogger() {
         if (isRightArrow && frogX < canvas.width - frogWidth) {
             frogX += 50;
@@ -185,20 +181,8 @@ function start() {
         }
     }
 
-    // let yArr = [555, 500, 445, 390, 225, 170, 115, 60];
-    // let randomY = yArr[Math.floor(Math.random() * yArr.length)];
-    // function drawRandomLife() {
-    //     let liveImg = new Image();
-    //     liveImg.src = './images/frogger.png';
-    //     let lifeX = 0;
-    //     let xSpeed = 1;
-        
-    //     lifeX += 5;
-    //     ctx.drawImage(liveImg, lifeX, randomY, 40, 40);
-    // }
-
-    //Alien line 2
-    function alienLine2() {
+    //Aliens on line 2 
+    function alienLeft() {
         for (let i=0; i < alien2.length; i++) {
             ctx.drawImage(alienImg, alien2[i].x, row2);
             alien2[i].x -= 1;
@@ -216,8 +200,8 @@ function start() {
         }
     }
 
-    //Alien line 7
-    function alienLine7() {
+    //Aliens on line 7
+    function alienRight() {
         for (let i=0; i < alien7.length; i++) {
             ctx.drawImage(alienImg, alien7[i].x, row7);
             alien7[i].x += 2;
@@ -235,7 +219,7 @@ function start() {
         }
     }
 
-    //Check collision aliens (for points)
+    //Check collision aliens 
     function checkAlienCollision(alienArr, row) {
         for (let i=0; i < alienArr.length; i++) {
             if ((frogX + frogWidth > alienArr[i].x && frogX < alienArr[i].x + 30) && (frogY < row + 30 && frogY + frogWidth > row)) {
@@ -247,7 +231,7 @@ function start() {
         }
     }
     
-    // Check asteroids collision
+    // Check asteroid collision
     function checkAsteroidCollision(astArr, row) {
         for (let i=0; i < astArr.length; i++) {
             if ((frogX + frogWidth > astArr[i].x && frogX < astArr[i].x + 35) && (frogY < row + 35 && frogY + frogWidth > row)) {
@@ -260,7 +244,7 @@ function start() {
                             frogX = 65;
                             frogY = canvas.height /2 - frogWidth;
                     } else {
-                            frogX = 370;
+                            frogX = 385;
                             frogY = canvas.height /2 - frogWidth;
                     }
                 }
@@ -279,7 +263,7 @@ function start() {
             this.xPush = xPush;
         }
 
-        drawRightTop () {
+        drawRight () {
             for (let i=0; i < this.astObj.length; i++) {
                 ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
                 this.astObj[i].x += this.astSpeed;
@@ -297,43 +281,7 @@ function start() {
             checkAsteroidCollision(this.astObj, this.row);
         };
 
-        drawRightBottom () {
-            for (let i=0; i < this.astObj.length; i++) {
-                ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
-                this.astObj[i].x += this.astSpeed;
-
-                if (this.astObj[i].x === 650) {
-                    this.astObj.slice(-1);
-                }
-                if (this.astObj[i].x === this.astPushX) {
-                    this.astObj.push({
-                        x: this.xPush,
-                        y: this.row
-                    });
-                }
-            }
-            checkAsteroidCollision(this.astObj, this.row);
-        };
-
-        drawLeftTop() {
-            for (let i=0; i < this.astObj.length; i++) {
-                ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
-                this.astObj[i].x -= this.astSpeed;
-    
-                if (this.astObj[i].x === -90) {
-                    this.astObj.slice(0);
-                }
-                if (this.astObj[i].x === this.astPushX) {
-                    this.astObj.push({
-                        x: this.xPush,
-                        y: this.row
-                    });
-                }
-            }
-            checkAsteroidCollision(this.astObj, this.row);
-        };
-
-        drawLeftBottom() {
+        drawLeft() {
             for (let i=0; i < this.astObj.length; i++) {
                 ctx.drawImage(astImg, this.astObj[i].x, this.row, this.astWidth, this.astWidth);
                 this.astObj[i].x -= this.astSpeed;
@@ -352,6 +300,7 @@ function start() {
         };
     }
 
+    // Make asteroids
     let astArr1 = new Asteroid (-30, row1, 35, 3, ast1, 201, -30);
     let astArr4 = new Asteroid (-40, row4, 35, 1, ast4, 151, -35);
     let astArr5 = new Asteroid (250, row5, 35, 2, ast5, 260, -30);
@@ -426,23 +375,35 @@ function start() {
         ctx.drawImage(bluePlanet, 40, canvas.height/2 - 45, 90, 90);
         ctx.drawImage(yellowPlanet, 360, canvas.height/2 - 45, 90, 90);
         ctx.drawImage(frogger, frogX, frogY, frogWidth, frogWidth);
-        
         drawBlackHole();
-       
-        astArr1.drawRightTop();
-        astArr4.drawRightTop();
-        astArr5.drawRightBottom();
-        astArr7.drawRightBottom();
-        astArr2.drawLeftTop();
-        astArr3.drawLeftTop();
-        astArr6.drawLeftBottom();
-        astArr8.drawLeftBottom();
-
-        alienLine2();
-        alienLine7();
-
+        astArr1.drawRight();
+        astArr4.drawRight();
+        astArr5.drawRight();
+        astArr7.drawRight();
+        astArr2.drawLeft();
+        astArr3.drawLeft();
+        astArr6.drawLeft();
+        astArr8.drawLeft();
+        alienLeft();
+        alienRight();
         checkFroggerWin(); 
     }
+
+    //Draw random life
+    // function drawRandomLife() {
+    //     let locationArr = [[160, 315],[320, 315],[20, 610],[600, 225]];
+    //     let liveImg = new Image();
+    //     liveImg.src = './images/starDef.png';
+    //     let randomCoordinates = locationArr[Math.floor(Math.random() * locationArr.length)];
+    //     let randomX = randomCoordinates[0];
+    //     let randomY = randomCoordinates[1];
+    //     ctx.drawImage(liveImg, randomX, randomY, 20, 20);
+    // }
+
+    // setInterval(() => {
+    //     drawRandomLife();
+    //     clearRect(randomX, randomY, 20, 20);
+    // }, 1000)
 
     intervalId = setInterval(() => {
         requestAnimationFrame(drawCanvas); 
