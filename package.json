@@ -1,0 +1,20 @@
+{
+  "name": "frogger-lightyear",
+  "version": "1.0.0",
+  "description": "Frogger Lightyear is inspired by 80s classic Frogger. The player move from the bottom of the screen to the top, avoiding moving asteroids and a black hole on its way. The player wins by reaching the top of the gameboard. The player loses when the damage to its ship is too great or he hits the black hole. A score is calculated based on the amount of time the game lasted.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llanting/frogger-lightyear.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llanting/frogger-lightyear/issues"
+  },
+  "homepage": "https://github.com/llanting/frogger-lightyear#readme"
+}

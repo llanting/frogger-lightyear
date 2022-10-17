@@ -1,5 +1,10 @@
 # Frogger Lightyear
 
+## TODO
+BG music
+Inherit classes fro aliens & asteroid etc
+Separate file with all query selectors
+
 
 ## Description
 Frogger Lightyear is inspired by 80s classic Frogger. The player move from the bottom of the screen to the top, avoiding moving asteroids and a black hole on its way. The player wins by reaching the top of the gameboard. The player loses when the damage to its ship is too great or he hits the black hole. A score is calculated based on the amount of time the game lasted.
