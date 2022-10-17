@@ -37,22 +37,40 @@ window.addEventListener("load",
 
 // On click, start game
 if (document.getElementById('start-btn')) {
-    document.getElementById('start-btn').addEventListener('click', () => startGame());
+    document.getElementById('start-btn')
+        .addEventListener('click', () => startGame());
 }
 
 // On restart, open splash screen again
 if (document.getElementById('restart-btn')) {
-    document.getElementById('restart-btn').addEventListener('click', () => openSplashScreen());
+    document.getElementById('restart-btn')
+        .addEventListener('click', () => openSplashScreen());
+}
+
+// Add listener on music toggle button
+if (document.querySelector('.splashScreen__music-toggle')) {
+    document.querySelector('.splashScreen__music-toggle')
+        .addEventListener('click', () => {
+            if (isMusicPlaying(splashMusic)) {
+                splashMusic.pause();
+                return;
+            }
+            if (!isMusicPlaying(splashMusic)) {
+                playMusic(splashMusic);
+                return;
+            }
+        })
 }
 
 function animateSplashScreen() {
-    animateTitle();
+    animateTitle('go');
 
     // playMusic(splashMusic);
-    pauseSplashMusic(splashMusic);
 }
 
 function startGame() {
+    animateTitle('clear');
+
     splashMusic.pause();
     // playMusic(startMusic);
 

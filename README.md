@@ -1,9 +1,9 @@
 # Frogger Lightyear
 
 ## TODO
-Inherit classes fro aliens & asteroid etc
 All TODOs in file
 CSS & classnames cleanup
+Typescript
 
 
 ## Description

@@ -61,14 +61,14 @@ export default class Game {
         this.asteroids.push(new AsteroidRow(this.ctx, 330, this.row8, 1, 'right', 2, 300, 500));
 
         this.asteroids.forEach((asteroidRow) => {
-            asteroidRow.makeAsteroidsArray();
+            asteroidRow.makeItemsArray();
         });
 
         this.aliens.push(new AlienRow(this.ctx, 400, this.row2, 1, 'left', 150, 500));
         this.aliens.push(new AlienRow(this.ctx, -100, this.row7, 2, 'right', 130, -30));
 
         this.aliens.forEach((alienRow) => {
-            alienRow.makeAliensArray();
+            alienRow.makeItemsArray();
         });
 
         this.frogger.listenToKeys();
@@ -97,7 +97,7 @@ export default class Game {
     }
 
     updateCanvas = () => {
-        // The order of these items matter!
+        // The order of these items does matter!
         this.drawBackgrounds();
         this.drawPlanets();
         this.drawAsteroids();
@@ -151,7 +151,8 @@ export default class Game {
 
     checkAsteroidCollision(asteroidRow) {
         // TODO: we can also do this without getters. What is best practice?
-        const asteroids = asteroidRow.getAsteroids();
+        // TODO: we can do the check for asteroids and aliens in 1 function? Only have to give the width (35/30)
+        const asteroids = asteroidRow.getItems();
         const asteroidsY = asteroidRow.getY();
         const froggerX = this.frogger.getFroggerX();
         const froggerY = this.frogger.getFroggerY();
@@ -184,8 +185,7 @@ export default class Game {
     }
 
     checkAlienCollision(alienRow) {
-        // TODO: remove getters?
-        const aliens = alienRow.getAliens();
+        const aliens = alienRow.getItems();
         const alienY = alienRow.getY();
         const froggerX = this.frogger.getFroggerX();
         const froggerY = this.frogger.getFroggerY();

@@ -1,11 +1,12 @@
-const animateTitle = () => {
+const animateTitle = (type) => {
     let titleInterval;
 
-    titleInterval = setInterval(() => {
-        // TODO: this seems weird
-        let index = 0;
-        index++;
+    if (type === 'clear') {
+        clearInterval(titleInterval);
+        return;
+    }
 
+    titleInterval = setInterval(() => {
         let timeOut = 0;
 
         if (document.querySelector('.animate-0')) {
@@ -17,20 +18,18 @@ const animateTitle = () => {
 
                 timeOut += 500;
             }
-
-            if (index == 1) {
-                clearInterval(titleInterval);
-            }
         }
     }, 700)
 };
 
 const changeTitle = (index) => {
     const ANIMATE_TITLE = document.getElementById('animate-title');
-    const titleStr = ANIMATE_TITLE.innerText;
-    let titleArr = titleStr.split(' ');
-    titleArr[index] = `<img src="./images/rsz_1frogger.png">`;
-    return titleArr[index].toString();
+    if (ANIMATE_TITLE) {
+        const titleStr = ANIMATE_TITLE.innerText;
+        let titleArr = titleStr.split(' ');
+        titleArr[index] = `<img src="./images/rsz_1frogger.png">`;
+        return titleArr[index].toString();
+    }
 };
 
 export default animateTitle;
