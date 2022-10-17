@@ -1,0 +1,12 @@
+.button {
+    border-radius: 50%;
+    height: 20vw;
+    width: 20vw;
+    font-size: 3.5vw;
+    background: #dc3545;
+    color: #fff;
+}
+
+.button:hover {
+    background: #c82333;
+}

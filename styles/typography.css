@@ -1,0 +1,19 @@
+h1 {
+    font-size: 35px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h1,
+h3,
+p {
+    margin-bottom: 0px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+}

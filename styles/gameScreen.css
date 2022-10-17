@@ -1,0 +1,19 @@
+/* Game */
+.gamescreen {
+    height: 100%;
+    background-color: rgb(1, 0, 32);
+}
+
+.score-lives {
+    padding-top: 30px;
+}
+
+.lives {
+    width: 28px;
+    height: auto;
+}
+
+.canvas-container {
+    margin: 20px;
+    margin-bottom: 0px;
+}

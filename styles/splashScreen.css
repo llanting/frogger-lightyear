@@ -1,0 +1,76 @@
+/* Splash */
+.splashScreen {
+    background-image: url('/images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
+    background-size: 100% auto;
+    background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.splashScreen__title {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 90vw;
+}
+
+.splashScreen__music-toggle {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    width: 32px;
+    height: 32px;
+}
+
+.splashScreen__music-toggle img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.splashScreen__music-toggle:focus {
+    outline: 0;
+}
+
+.splashScreen__h1 {
+    color: #27c208;
+    text-shadow: -5px 2px 2px #db00b3;
+}
+
+.splashScreen__lead {
+    margin: 20px 0;
+    font-size: 13px;
+    line-height: 25px;
+    width: 70vw;
+}
+
+.splashScreen__h3 {
+    margin-bottom: 20px;
+}
+
+.splashScreen__name-input {
+    margin: 20px 0;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px 15px;
+}
+
+.splashScreen__button-container {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 40px;
+}
+
+.splashScreen__image {
+    width: 15vw;
+    height: 15vw;
+    border: 5px solid #dc3545;
+}

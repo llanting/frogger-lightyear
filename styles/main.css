@@ -1,0 +1,22 @@
+@import url('./button.css');
+@import url('./typography.css');
+@import url('./splashScreen.css');
+@import url('./gameScreen.css');
+@import url('./gameOverScreen.css');
+@import url('./highscores.css');
+
+body {
+    background-image: url('/images/kai-pilger-Ef6iL87-vOA-unsplash.jpg');
+    background-size: 100% auto;
+    background-repeat: repeat;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    min-height: 100vh;
+}
+
+body > main {
+    height: 100%;
+}

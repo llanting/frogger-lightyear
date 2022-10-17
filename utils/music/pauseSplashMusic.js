@@ -1,7 +1,7 @@
 import { isMusicPlaying } from "./music.js";
 
 const pauseSplashMusic = (music) => {
-    const musicBtn = document.querySelector('.music');
+    const musicBtn = document.querySelector('.splashScreen__music-toggle');
 
     // console.log('asd', musicBtn)
     // TODO: pausing not working yet. musicBtn is null

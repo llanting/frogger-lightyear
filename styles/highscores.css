@@ -1,0 +1,32 @@
+/* Show highscores one by one */
+@keyframes highscores {
+    99% {
+        visibility: hidden;
+    }
+
+    100% {
+        visibility: visible;
+    }
+}
+
+.highscores>* {
+    animation: 0.35s highscores;
+    animation-fill-mode: forwards;
+    visibility: hidden;
+}
+
+.highscores *:nth-child(4) {
+    animation-duration: 0.7s;
+}
+
+.highscores *:nth-child(3) {
+    animation-duration: 1.05s;
+}
+
+.highscores *:nth-child(2) {
+    animation-duration: 1.4s;
+}
+
+.highscores *:nth-child(1) {
+    animation-duration: 1.75s;
+}

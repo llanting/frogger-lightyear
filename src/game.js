@@ -1,5 +1,5 @@
 function start() {
-    //Draw random life
+    // TODO: Draw random life
     // function drawRandomLife() {
     //     let locationArr = [[160, 315],[320, 315],[20, 610],[600, 225]];
     //     let liveImg = new Image();

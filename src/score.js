@@ -22,14 +22,18 @@ export default class Score {
     }
 
     setFinalScore() {
-       if (document.querySelector('.end-score')) {
-            document.querySelector('.end-score').innerText = `Your score: ${this.score}`;
+        const FINAL_SCORE = document.querySelector('.end-score');
+
+        if (FINAL_SCORE) {
+            FINAL_SCORE.innerText = `Your score: ${this.score}`;
         }
     }
 
     showScoreDuringPlay = () => {
-        if (document.querySelector('.score-num')) {
-            document.querySelector('.score-num').innerText = `Score: ${this.score}`;
+        const SCORE = document.querySelector('.score-num');
+
+        if (SCORE) {
+            SCORE.innerText = `Score: ${this.score}`;
         }
     }
 

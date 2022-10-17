@@ -1,6 +1,7 @@
 function setHighScore(score, index) {
-    if (document.querySelector(`.scoreLi${index + 1}`)) {
-        document.querySelector(`.scoreLi${index + 1}`).innerText = `${score.name} : ${score.score}`;
+    const SCORE_LI_ITEM = document.querySelector(`.scoreLi${index + 1}`)
+    if (SCORE_LI_ITEM) {
+        SCORE_LI_ITEM.innerText = `${score.name} : ${score.score}`;
     }
 }
 

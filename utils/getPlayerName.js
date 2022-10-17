@@ -1,9 +1,10 @@
 const getPlayerName = () => {
+    const NAME_INPUT = document.getElementById('name-input');
+
     let playerName = 'Frogger';
 
-    console.log(document.querySelector('input').value)
-    if (document.querySelector('input') && document.querySelector('input').value) {
-        playerName = document.querySelector('input').value;
+    if (NAME_INPUT && NAME_INPUT.value) {
+        playerName = NAME_INPUT.value;
     }
 
     return playerName;

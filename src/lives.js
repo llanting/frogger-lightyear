@@ -21,8 +21,10 @@ export default class Lives {
     }
 
     removeLifeIcon = () => {
-        if (document.querySelector('.lives')) {
-            document.querySelector('.lives').parentNode.removeChild(document.querySelector('.lives'));
+        const LIVES = document.querySelector('.lives');
+
+        if (LIVES) {
+            LIVES.parentNode.removeChild(LIVES);
         }
     }
 }
