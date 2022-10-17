@@ -48,13 +48,13 @@ if (document.getElementById('restart-btn')) {
 function animateSplashScreen() {
     animateTitle();
 
-    playMusic(splashMusic);
+    // playMusic(splashMusic);
     pauseSplashMusic(splashMusic);
 }
 
 function startGame() {
     splashMusic.pause();
-    playMusic(startMusic);
+    // playMusic(startMusic);
 
     const playerName = getPlayerName();
     removeActiveScreen();
@@ -89,11 +89,11 @@ function createFinalScreen(result) {
 }
 
 function playWinSound() {
-    playMusic(winSound);
+    // playMusic(winSound);
 }
 
 function playBGMusic() {
-    playMusic(bgMusic);
+    // playMusic(bgMusic);
 }
 
 export { removeGameScreen, createFinalScreen, playWinSound, playBGMusic };

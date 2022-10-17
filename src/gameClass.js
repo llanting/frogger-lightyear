@@ -97,6 +97,7 @@ export default class Game {
     }
 
     updateCanvas = () => {
+        // The order of these items matter!
         this.drawBackgrounds();
         this.drawPlanets();
         this.drawAsteroids();
@@ -159,7 +160,6 @@ export default class Game {
         for (let i = 0; i < asteroids.length; i++) {
 
             const isFroggerOnAsteroid = ((froggerX + froggerWidth > asteroids[i].x && froggerX < asteroids[i].x + 35) && (froggerY < asteroidsY + 35 && froggerY + froggerWidth > asteroidsY)) ? true : false;
-
             if (isFroggerOnAsteroid) {
                 this.lives.removeLife();
 
@@ -215,15 +215,13 @@ export default class Game {
 
         if (blackHoleX < froggerX) {
             closestX = froggerX;
-        }
-        if (blackHoleX > froggerX + froggerWidth) {
-            closestX - froggerX + froggerWidth;
+        } else if (blackHoleX > froggerX + froggerWidth) {
+            closestX = froggerX + froggerWidth;
         }
 
         if (blackHoleY < froggerY) {
             closestY = froggerY;
-        }
-        if (blackHoleY > froggerY + froggerWidth) {
+        } else if (blackHoleY > froggerY + froggerWidth) {
             closestY = froggerY + froggerWidth;
         }
 

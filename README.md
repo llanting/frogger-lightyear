@@ -1,9 +1,10 @@
 # Frogger Lightyear
 
 ## TODO
-BG music
 Inherit classes fro aliens & asteroid etc
 Separate file with all query selectors
+All TODOs in file
+CSS improvement & file separation
 
 
 ## Description
