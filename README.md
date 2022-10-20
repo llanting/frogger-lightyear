@@ -1,9 +1,9 @@
 # Frogger Lightyear
 
 ## TODO
-All TODOs in file
-CSS & classnames cleanup
-Typescript
+- All TODOs in file
+- CSS & classnames cleanup
+- Add Typescript
 
 
 ## Description
@@ -36,71 +36,6 @@ URls for the project repo and deploy:
 
 ## Backlog
 
-- Add music
-- Add scoreboard
-- Name input
-- Add aliens to eat for points
 - Pick up other froggers for lives (on safe planets)
-
-## Data Structure
-
-# main.js
-- createSplashScreen () {}
-- removeSplashScreen() {}
-- createGameScreen () {}
-- removeGameScreen() {}
-- createGameOverScreen () {}
-- removeGameOverScreen() {}
-- createWinScreen() ()
-- removeWinScreen() {}
-
-# game.js
-- start() {}
-- drawCanvas() {}
-- moveFrogger() {}
-- drawBlackHole() {}
-- checkBlackHoleCollision() {}
-- drawAliens() {}
-- checkAlienCollision() {}
-- class Asteroid {}
-- checkAsteroidCollision() {}
-- getHighscore() {}
-- gameOver() {}
-- gameWin() {}
-- checkNumberLives() {}
-- checkFroggerWin() {}
-- showScore() {}
-
-## States y States Transitions
-Definition of the different states and their transition (transition functions)
-
-- splashScreen
-- gameScreen
-- gameOver (if player dies before reaching the top)
-- gameWin (if player reaches the top)
-
-## Task
-
-- main - buildDom
-- main - buildSplashScreen
-- main - addEventListener
-- main - buildGameScreen
-- main - buildGameOverScreen
-- main - makeImgs
-
-- game - buildCanvas
-- game - updateCanvas
-- game - drawCanvas
-- game - addEventListener
-- game - gameLoop
-- game - checkCollision
-- game - GameOver
-
-- frogger - draw
-- frogger - move
-- game - addAsteroid
-- asteroid - draw
-- asteroid - move
-- planet - draw
 
 
